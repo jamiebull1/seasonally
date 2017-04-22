@@ -26,7 +26,7 @@ class GoodfoodSpider(scrapy.Spider):
     def start_requests(self):
 #        for product in self.products[:1]:
         for product in self.products:
-            url = 'http://bbcgoodfood.com/search/recipes?query=%s' % product
+            url = 'http://www.bbcgoodfood.com/search/recipes?query=%s' % product
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
