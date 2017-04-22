@@ -1,0 +1,61 @@
+{% extends "suggest/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<body>
+	  <div class="grid">
+	    <div class="row">
+	      <div class="col-2 months">
+	          <p>
+		          <span class="{% if abbr_month == "jan" %} curr-month{% endif %}">Jan</span>
+		          <span class="{% if abbr_month == "feb" %} curr-month{% endif %}">Feb</span>
+		          <span class="{% if abbr_month == "mar" %} curr-month{% endif %}">Mar</span>
+	          </p>
+	          <p>
+		          <span class="{% if abbr_month == "apr" %} curr-month{% endif %}">Apr</span>
+		          <span class="{% if abbr_month == "may" %} curr-month{% endif %}">May</span>
+		          <span class="{% if abbr_month == "jun" %} curr-month{% endif %}">Jun</span>
+	          </p>
+	          <p>
+		          <span class="{% if abbr_month == "jul" %} curr-month{% endif %}">Jul</span>
+		          <span class="{% if abbr_month == "aug" %} curr-month{% endif %}">Aug</span>
+		          <span class="{% if abbr_month == "sep" %} curr-month{% endif %}">Sep</span>
+	          </p>
+	          <p>
+		          <span class="{% if abbr_month == "oct" %} curr-month{% endif %}">Oct</span>
+		          <span class="{% if abbr_month == "nov" %} curr-month{% endif %}">Nov</span>
+		          <span class="{% if abbr_month == "dec" %} curr-month{% endif %}">Dec</span>
+	          </p>
+	      </div>
+	      <div class="col-4"></div>
+	      <div class="col-6">
+	          <h1>Seasonally</h1>
+	          <h2>Recipes for right now</h2>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="col-12"><img src="{% static 'images/lamb.jpg' %}"></div>
+	    </div>
+	    <div class="row">
+	      <div class="col-12">
+	        <h3>BBC Good Food: {{ month }}</h3>
+	      </div>
+	    </div>
+	    <div class="row">
+	      {% for recipe in recipes %}
+		      <div class="col-4">
+		        <a href="{{ recipe.url }}">
+		            <img class="thumb" src="{{ recipe.image_url }}">
+		        </a>
+		        <a href="{{ recipe.url }}">
+		            <h4>{{ recipe.name }}</h4>
+		        </a>
+		        <p class="teaser">{{ recipe.teaser }}</p>
+		      </div>
+	      {% endfor %}
+	    </div>
+	    <div class="row">
+	      <div class="col-12"><img src="http://placehold.it/1194x150"></div>
+	    </div>
+	  </div>
+	</body>
+{% endblock %}
