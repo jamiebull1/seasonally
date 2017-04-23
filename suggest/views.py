@@ -22,20 +22,26 @@ def index(request):
     # fetch items for this month
     while len(context['recipes']) < 3:
         # choose a product
-        product = fetch_product(month_num)
+        product = None
+        while not product:
+            product = fetch_product(month_num)
         # fetch a recipe using the product
         recipe = fetch_recipe(product)
-        if recipe not in context['recipes']:
+        if recipe and recipe not in context['recipes']:
             context['recipes'].append(recipe)
     return render(request, 'suggest/index.html', context=context)
 
 
 def fetch_product(month_num):
     """Fetch a random seasonal product from the database."""
-    product = Product.objects.filter(months__num=month_num).order_by('?')[0]
-    return product
-
+    try:
+        return Product.objects.filter(months__num=month_num).order_by('?')[0]
+    except IndexError:
+        return
 
 def fetch_recipe(product):
     """Fetch a random recipe from the chosen product."""
-    return product.recipe.values().order_by('?')[0]
+    try:
+        return product.recipe.values().order_by('?')[0]
+    except IndexError:
+        return
