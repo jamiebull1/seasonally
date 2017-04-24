@@ -8,6 +8,9 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BOT_NAME = 'scraper'
 
@@ -19,7 +22,7 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 # USER_AGENT = 'scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -66,8 +69,13 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'scraper.pipelines.RecipePipeline': 300,
+    'scrapy.pipelines.images.ImagesPipeline': 400,
 }
-
+IMAGES_THUMBS = {
+    'square': (300, 300),
+}
+IMAGES_STORE = os.path.join(
+    BASE_DIR, os.pardir, 'suggest/static/images')
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True

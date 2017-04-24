@@ -44,7 +44,7 @@
 	      {% for recipe in recipes %}
 		      <div class="col-4">
 		        <a href="{{ recipe.url }}">
-		            <img class="thumb" src="{{ recipe.image_url }}">
+		            <img class="thumb" src="{% static recipe.image_url %}.jpg">
 		        </a>
 		        <a href="{{ recipe.url }}">
 		            <h4>{{ recipe.name }}</h4>

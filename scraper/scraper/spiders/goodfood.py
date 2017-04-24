@@ -35,7 +35,7 @@ class GoodfoodSpider(scrapy.Spider):
 #        inspect_response(response, self)
 
 #        for recipe in recipes[:1]:
-        for recipe in recipes[:10]:
+        for recipe in recipes:
             item = RecipeItem()
             query = response.url.split('query=')[-1]
             product = urllib.unquote(query)
@@ -54,10 +54,6 @@ class GoodfoodSpider(scrapy.Spider):
             "//div[@class='ingredients-list']//text()").extract()
         ingredients = ', '.join(ingredients)
         item['ingredients'] = unicodedata.normalize("NFKD", ingredients)
-        #=======================================================================
-        # print(type(ingredients))
-        # item['ingredients'] = ingredients.encode('utf-8')
-        #=======================================================================
         if item['product'].lower() not in item['ingredients'].lower():
             yield None
         else:
@@ -66,7 +62,7 @@ class GoodfoodSpider(scrapy.Spider):
             item['url'] = response.url
             image_url = s.xpath(
                 "//img[@itemprop='image']/@src").extract_first()
-            item['image_url'] = image_url.split('?')[0]
+            item['image_urls'] = [urljoin(self.root, image_url)]
     #        inspect_response(response, self)
             teaser = s.xpath(
                 "//div[@class='recipe-header__description']//text()").extract_first()
