@@ -33,7 +33,7 @@ body {
 a {
     text-decoration: none;
     text-align: center;
-    display: block;
+    display: flex-inline;
 }
 .thumb {
     margin: 5% auto;
@@ -46,6 +46,21 @@ a {
 .logo {
     width: 100%;
     border: 2px solid #555;
+}
+
+.social-icon > a > img {
+	display: block;
+	margin: auto;
+}
+
+.footer {
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+	background-color: #efefef;
+	text-align: center;
+	width: 100%;
 }
 
 .grid {

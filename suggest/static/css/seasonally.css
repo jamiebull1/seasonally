@@ -50,4 +50,5 @@ h4  {
 	.recipe {width: 100%;}
 	#header {font-size: 45%;}
 	.months > p > span {font-size: 45%;}
+	.months > p {margin: 0px;}
 	}
