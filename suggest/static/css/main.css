@@ -1,5 +1,5 @@
-{
-    border: 1px solid red !important;
+* {
+    border: 1px solid red;
 }
 
 * {
@@ -16,7 +16,7 @@ h1, h2 , h3, h4{
     margin-bottom: 0px;
 }
 h1 {
-    font-size: 60px;
+    font-size: 3em;
     margin: 0px;
 }
 h3 {
@@ -45,13 +45,6 @@ a {
     width: 100%;
     border: 2px solid #555;
 }
-
-@media only screen and (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
-@media only screen and (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
-@media only screen and (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
-@media only screen and (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media only screen and (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
-@media only screen and (min-width:1281px) { /* hi-res laptops and desktops */ }
 
 .grid {
     margin: 0 auto;

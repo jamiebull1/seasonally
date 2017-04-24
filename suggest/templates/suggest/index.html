@@ -4,7 +4,7 @@
 	<body>
 	  <div class="grid">
 	    <div class="row">
-	      <div class="col-4 months">
+	      <div class="col-4 months" id="calendar">
 	          <p>
 		          <span class="{% if abbr_month == "jan" %} curr-month{% endif %}">Jan</span>
 		          <span class="{% if abbr_month == "feb" %} curr-month{% endif %}">Feb</span>
@@ -27,13 +27,13 @@
 	          </p>
 	      </div>
 	      <div class="col-2"></div>
-	      <div class="col-6">
+	      <div class="col-6" id="header">
 	          <h1>Seasonally</h1>
 	          <h2>Recipes for right now</h2>
 	      </div>
 	    </div>
 	    <div class="row">
-	      <div class="col-12"><img src="{% static 'images/lamb.jpg' %}"></div>
+	      <div class="col-12"><img src="{% static 'images/lamb.jpg' %}" width=100%></div>
 	    </div>
 	    <div class="row">
 	      <div class="col-12">
@@ -42,7 +42,7 @@
 	    </div>
 	    <div class="row">
 	      {% for recipe in recipes %}
-		      <div class="col-4">
+		      <div class="col-4 recipe">
 		        <a href="{{ recipe.url }}">
 		            <img class="thumb" src="{% static recipe.image_url %}.jpg">
 		        </a>
@@ -54,7 +54,7 @@
 	      {% endfor %}
 	    </div>
 	    <div class="row">
-	      <div class="col-12"><img src="http://placehold.it/1194x150"></div>
+	      <div class="col-12"><img src="http://placehold.it/1194x150" width=100%></div>
 	    </div>
 	  </div>
 	</body>
