@@ -4,6 +4,8 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import datetime
+
 from django.shortcuts import render
 
 from api.views import fetch_recipe
@@ -14,4 +16,7 @@ def index(request):
     context = {}
     # fetch items for this month
     context = {'recipes': [fetch_recipe() for _i in range(3)]}
+    today = datetime.datetime.now()
+    abbr_month = today.strftime('%b').lower()
+    context['abbr_month'] = abbr_month
     return render(request, 'suggest/index.html', context=context)
