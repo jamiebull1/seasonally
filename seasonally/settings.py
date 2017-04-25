@@ -20,15 +20,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=@joi9s0mul25g-v9zk5x^j%_&vt4!tas2q=e!s4a*5lp=8wd$'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [u'seasonally.pythonanywhere.com', u'127.0.0.1']
-
-
 # Application definition
 
 INSTALLED_APPS = [
