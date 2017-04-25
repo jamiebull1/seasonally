@@ -54,6 +54,12 @@ def add_month(request):
     return JsonResponse({'success': True})
 
 
+@api_view(['GET'])
+def recipe(request):
+    recipe = fetch_recipe()
+    return JsonResponse({'success': True, 'recipe': recipe})
+
+
 def fetch_recipe(product=None):
     """Fetch a random recipe from the chosen product."""
     if not product:
