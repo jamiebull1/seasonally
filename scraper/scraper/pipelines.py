@@ -6,6 +6,9 @@ from __future__ import unicode_literals
 
 import requests
 from hashlib import sha1
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class RecipePipeline(object):
@@ -20,6 +23,12 @@ class RecipePipeline(object):
             'image_url': image_url,
             'teaser': item['teaser'],
             'product': item['product'],
+            'additional': item['additional'],
             }
         r = requests.post("http://127.0.0.1:8000/api/v1/add-recipe/", data)
+        if r.status_code == 200:
+            logger.debug('Post recipe succeeded')
+        else:
+            logger.error('Post recipe failed: %s' % r.status_code)
+
         return item

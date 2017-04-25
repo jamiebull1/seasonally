@@ -5,6 +5,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import datetime
+import json
 
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -20,6 +21,7 @@ def add_recipe(request):
     recipe.url = params.get('url')
     recipe.image_url = params.get('image_url')
     recipe.teaser = params.get('teaser').encode('utf-8')
+    recipe.additional = json.dumps(params.getlist('additional'))
     recipe.save()
     # get product from DB or add it if not yet present
     product = Product.objects.filter(name=params.get('product')).first()

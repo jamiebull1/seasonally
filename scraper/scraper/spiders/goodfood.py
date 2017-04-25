@@ -67,4 +67,5 @@ class GoodfoodSpider(scrapy.Spider):
             teaser = s.xpath(
                 "//div[@class='recipe-header__description']//text()").extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser)  # .encode('utf-8')
+            item['additional'] = s.xpath('//ul[@class="additional-info"]//text()').extract()
             yield item

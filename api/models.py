@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import json
+
 from django.db import models
 
 
@@ -19,10 +21,12 @@ class Recipe(models.Model):
     url = models.URLField()
     image_url = models.URLField()
     teaser = models.CharField(max_length=500)
+    additional = models.CharField(max_length=200, default=json.dumps([]))
 
     def __unicode__(self):
         """Unicode representation for admin site."""
         return u"{0}".format(self.name)
+
 
 class Product(models.Model):
     """Model representing a seasonal product."""

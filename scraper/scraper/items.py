@@ -15,3 +15,4 @@ class RecipeItem(scrapy.Item):
     teaser = scrapy.Field()
     product = scrapy.Field()
     ingredients = scrapy.Field()
+    additional = scrapy.Field()
