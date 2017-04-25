@@ -4,10 +4,12 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import datetime
+
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
 from .models import Recipe, Product, Month
-from rest_framework.decorators import api_view
 
 
 @api_view(['POST'])
@@ -50,3 +52,34 @@ def add_month(request):
     month.num = params.get('num')
     month.save()
     return JsonResponse({'success': True})
+
+
+def fetch_recipe(product=None):
+    """Fetch a random recipe from the chosen product."""
+    if not product:
+        product = fetch_product()
+    try:
+        return product.recipe.values().order_by('?')[0]
+    except IndexError:
+        return fetch_recipe()
+
+
+def fetch_product(month_num=None):
+    """Fetch a random seasonal product from the database."""
+    if not month_num:
+        month = fetch_month()
+        month_num = month.get('month_num')
+    try:
+        return Product.objects.filter(months__num=month_num).order_by('?')[0]
+    except IndexError:
+        return fetch_product(month_num)
+
+
+def fetch_month():
+    """Fetch the current month."""
+    today = datetime.datetime.now()
+    abbr_month = today.strftime('%b').lower()
+    month = today.strftime('%B')
+    month_num = int(today.strftime('%m'))
+    month = {'abbr_month': abbr_month, 'month': month, 'month_num': month_num}
+    return month
