@@ -10,6 +10,7 @@ from .models import Recipe, Product, Month
 from .views import add_recipe
 
 from .init_db import MONTHS
+from api.views import fetch_recipe
 
 
 class AddRecipeTest(TestCase):
@@ -70,3 +71,34 @@ class AddProductTest(TestCase):
              response.json(),
              {u'success': True})
 
+class GetRecipeTest(TestCase):
+    
+    def setUp(self):
+        data = {'name': 'BBQ Spam',
+                'months': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+        for i, name in enumerate(MONTHS, 1):
+            month = Month()
+            month.name = name
+            month.num = i
+            month.save()
+        response = self.client.post('/api/v1/add-product/', data)
+        self.assertEqual(response.status_code, 200)
+        data = {'name': 'Summer spam',
+                'url': 'https://example.com',
+                'image_url': 'https://example.com/images/spam.jpg',
+                'teaser': 'Great in summer!',
+                'product': 'BBQ Spam',
+                }
+        response = self.client.post('/api/v1/add-recipe/', data)
+        self.assertEqual(response.status_code, 200)
+    
+    def testMonthFilters(self):
+        for n in 6, 7, 8:
+            recipe = fetch_recipe(None, n)
+            self.assertEqual(recipe.get('name'), 'Summer spam')
+        for n in 1, 2, 3, 4, 5, 9, 10, 11, 12:
+            recipe = fetch_recipe(None, 5)
+            self.assertEqual(recipe, None)
+            self.assertEqual(recipe, None)
+        
+        

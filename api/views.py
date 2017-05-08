@@ -13,6 +13,17 @@ from rest_framework.decorators import api_view
 from .models import Recipe, Product, Month
 
 
+VALID_MONTHS = {
+    'easter': [4, 5],
+    'christmas': [12],
+    'spring': [3, 4, 5],
+    'summer': [6, 7, 8],
+    'autumn': [9, 10, 11],
+    'winter': [12, 1, 2],
+    'halloween': [10],
+    }
+
+
 @api_view(['POST'])
 def add_recipe(request):
     params = request.POST.copy()
@@ -58,20 +69,37 @@ def add_month(request):
 
 @api_view(['GET'])
 def recipe(request):
-    recipe = fetch_recipe()
+    recipe = None
+    count = 0
+    while not recipe and count < 20:
+        recipe = fetch_recipe()
+        count += 1
     return JsonResponse({'success': True, 'recipe': recipe})
 
 
-def fetch_recipe(product=None):
+def fetch_recipe(product=None, month_num=None):
     """Fetch a random recipe from the chosen product."""
     if not product:
         product = fetch_product()
-    try:
-        return product.recipe.values().order_by('?')[0]
-    except IndexError:
-        return fetch_recipe()
+    recipes = product.recipe.values().order_by('?')
+    if not month_num:
+        month = fetch_month()
+        month_num = month.get('month_num')
+    for recipe in recipes:
+        if is_valid(recipe, month_num):
+            return recipe
 
 
+def is_valid(recipe, month_num):
+    """Don't return items which are clearly for other seasons."""
+    teaser = recipe.get('teaser').lower()
+    for season in VALID_MONTHS:
+        months = VALID_MONTHS[season]
+        if season in teaser and month_num not in months:
+            return False
+    return True
+
+    
 def fetch_product(month_num=None):
     """Fetch a random seasonal product from the database."""
     if not month_num:
