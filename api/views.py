@@ -21,6 +21,7 @@ VALID_MONTHS = {
     'autumn': [9, 10, 11],
     'winter': [12, 1, 2],
     'halloween': [10],
+    'festive': [12],
     }
 
 
@@ -99,7 +100,7 @@ def is_valid(recipe, month_num):
             return False
     return True
 
-    
+
 def fetch_product(month_num=None):
     """Fetch a random seasonal product from the database."""
     if not month_num:
