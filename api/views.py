@@ -95,7 +95,11 @@ def fetch_recipe(product=None, month_num=None):
 
 def is_valid(recipe, month_num):
     """Don't return items which are clearly for other seasons."""
-    teaser = recipe.get('teaser').lower()
+    teaser = recipe.get('teaser', False)
+    if teaser:
+        teaser = teaser.lower()
+    else:
+        return False
     for season in VALID_MONTHS:
         months = VALID_MONTHS[season]
         if season in teaser and month_num not in months:
