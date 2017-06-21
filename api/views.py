@@ -89,6 +89,8 @@ def fetch_recipe(product=None, month_num=None):
     for recipe in recipes:
         if is_valid(recipe, month_num):
             return recipe
+        else:
+            fetch_recipe(month_num=month_num)
 
 
 def is_valid(recipe, month_num):
