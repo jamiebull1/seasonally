@@ -15,7 +15,7 @@ class RecipePipeline(object):
 
     def process_item(self, item, spider):
         image_url = item['image_urls'][0]
-        image_url = sha1(image_url).hexdigest()
+        image_url = sha1(image_url.encode('utf-8')).hexdigest()
         image_url = '/images/full/%s' % image_url
         data = {
             'name': item['name'],
@@ -25,10 +25,9 @@ class RecipePipeline(object):
             'product': item['product'],
             'additional': item['additional'],
             }
-        r = requests.post("http://127.0.0.1:8000/api/v1/add-recipe/", data)
-        if r.status_code == 200:
+        r = requests.post(u"http://seasonally.pythonanywhere.com/api/v1/add-recipe/", data)
+        if r.status_code == 200 and r.json() == {'success': True}:
             logger.debug('Post recipe succeeded')
         else:
-            logger.error('Post recipe failed: %s' % r.status_code)
-
+            logger.error('Post recipe failed: %s - %s' % (r.status_code, r.json()))
         return item

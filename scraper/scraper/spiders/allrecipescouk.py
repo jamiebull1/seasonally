@@ -17,10 +17,10 @@ from six.moves.urllib.parse import urljoin
 from ..items import RecipeItem
 
 
-class GoodfoodSpider(scrapy.Spider):
-    name = "goodfood"
-    allowed_domains = ["bbcgoodfood.com"]
-    root = "https://www.bbcgoodfood.com"
+class AllrecipesukSpider(scrapy.Spider):
+    name = "allrecipescouk"
+    allowed_domains = ["allrecipes.co.uk"]
+    root = "http://allrecipes.co.uk"
     products = [
         "Apple", "Apricot", "Asparagus", "Aubergine", "Banana", "Basil", "Beef", "Beetroot", "Blackberry",
         "Blackcurrants", "Bramley apple", "Broad bean", "Broad beans", "Broccoli", "Brussels sprouts", "Cabbage",
@@ -35,26 +35,22 @@ class GoodfoodSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    recipe_selector = '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not (contains(@href, "/collection/"))]/@href'
+    recipe_selector = '//a[starts-with(@href, "http://allrecipes.co.uk/recipe/")]/@href'
     def start_requests(self):
-        for product in self.products[:1]:
-        # for product in self.products:
-            url = 'http://www.bbcgoodfood.com/search/recipes?query=%s' % product
+        for product in self.products:
+            url = 'http://allrecipes.co.uk/recipes/searchresults.aspx?text=%s' % product
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         s = Selector(response)
         recipes = s.xpath(self.recipe_selector).extract()
-#        inspect_response(response, self)
-
-#        for recipe in recipes[:1]:
         for recipe in recipes:
             item = RecipeItem()
-            query = response.url.split('query=')[-1]
+            query = response.url.split('o_s_trm=')[-1]
             product = urllib.parse.unquote(query)
             item['product'] = unicodedata.normalize("NFKD", product)
             request = Request(
-                urljoin(self.root, recipe),
+                recipe,
                 callback=self.parse_recipe,
                 meta={'item': item}
                 )
@@ -62,23 +58,23 @@ class GoodfoodSpider(scrapy.Spider):
 
     def parse_recipe(self, response):
         s = Selector(response)
+        # inspect_response(response, self)
         item = response.meta['item']
-        ingredients = s.xpath(
-            "//div[@class='ingredients-list']//text()").extract()
+        ingredients = s.xpath("//span[@itemprop='ingredients']//text()").extract()
         ingredients = ', '.join(ingredients)
         item['ingredients'] = unicodedata.normalize("NFKD", ingredients)
         if item['product'].lower() not in item['ingredients'].lower():
             yield None
         else:
-            name = s.css(".recipe-header__title::text").extract_first()
-            item['name'] = unicodedata.normalize("NFKD", name)
+            name = s.xpath(
+                "//span[@itemprop='name']//text()").extract_first()
+            item['name'] = unicodedata.normalize("NFKD", name).strip()
             item['url'] = response.url
             image_url = s.xpath(
-                "//img[@itemprop='image']/@src").extract_first()
-            item['image_urls'] = [urljoin(text_type(self.root), text_type(image_url))]
-    #        inspect_response(response, self)
+                "//img[@class='recipe-img']/@data-imagesrc").extract_first()
+            item['image_urls'] = [urljoin(text_type(self.root), text_type(image_url)).format(size=2400)]
             teaser = s.xpath(
-                "//div[@class='recipe-header__description']//text()").extract_first()
-            item['teaser'] = unicodedata.normalize("NFKD", teaser)
-            item['additional'] = s.xpath('//ul[@class="additional-info"]//text()').extract()
+                "//p[@class='description']//text()").extract_first()
+            item['teaser'] = unicodedata.normalize("NFKD", teaser).strip()
+            item['additional'] = []
             yield item
