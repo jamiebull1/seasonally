@@ -72,7 +72,7 @@ class AllrecipesukSpider(scrapy.Spider):
             item['url'] = response.url
             image_url = s.xpath(
                 "//img[@class='recipe-img']/@data-imagesrc").extract_first()
-            item['image_urls'] = [urljoin(text_type(self.root), text_type(image_url)).format(size=2400)]
+            item['image_urls'] = [urljoin(text_type(self.root), text_type(image_url)).format(size=500)]
             teaser = s.xpath(
                 "//p[@class='description']//text()").extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser).strip()
