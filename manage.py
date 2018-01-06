@@ -3,10 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    if os.environ.get('DJANGO_DEVELOPMENT') is not None:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seasonally.dev")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seasonally.prod")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seasonally.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

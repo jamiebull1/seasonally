@@ -25,9 +25,9 @@ class RecipePipeline(object):
             'product': item['product'],
             'additional': item['additional'],
             }
-        r = requests.post(u"http://seasonally.pythonanywhere.com/api/v1/add-recipe/", data)
+        r = requests.post("http://127.0.0.1:8000/api/v1/add-recipe/",data)
         if r.status_code == 200 and r.json() == {'success': True}:
             logger.debug('Post recipe succeeded')
         else:
-            logger.error('Post recipe failed: %s - %s' % (r.status_code, r.json()))
+            logger.error('Post recipe failed: %s : %s' % (r.status_code, r.json()))
         return item
