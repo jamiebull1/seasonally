@@ -130,9 +130,9 @@ MONTHS = [
 if __name__ == "__main__":
     for i, month in enumerate(MONTHS, 1):
         data = {'name': month, 'num': i}
-        r = requests.post("https://127.0.0.1:8000/api/v1/add-month/", data)
+        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-month/", data)
     for product in PRODUCTS:
         data = {'name': product, 'months': PRODUCTS.get(product)}
         print(product)
         print(PRODUCTS.get(product))
-        r = requests.post("https://127.0.0.1:8000/api/v1/add-product/", data)
+        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-product/", data)

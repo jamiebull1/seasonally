@@ -25,7 +25,7 @@ class RecipePipeline(object):
             'product': item['product'],
             'additional': item['additional'],
             }
-        r = requests.post("http://127.0.0.1:8000/api/v1/add-recipe/",data)
+        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-recipe/",data)
         if r.status_code == 200 and r.json() == {'success': True}:
             logger.debug('Post recipe succeeded')
         else:
