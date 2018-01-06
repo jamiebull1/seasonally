@@ -35,7 +35,6 @@ class AllrecipesukSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    products = ['Asparagus']
     recipe_selector = '//a[starts-with(@href, "http://allrecipes.co.uk/recipe/")]/@href'
     def start_requests(self):
         for product in self.products:

@@ -35,11 +35,16 @@ a {
     text-align: center;
     display: flex-inline;
 }
+.thumb-container {
+    width: 370px;
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
 .thumb {
-    margin: 5% auto;
-    width: 90%;
-    max-width: 350px;
-    display: block;
+    margin: 2% auto;
+    width: 350px;
+    height: 350px;
     border: 1px solid #ddd;
 }
 

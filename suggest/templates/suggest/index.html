@@ -37,19 +37,21 @@
 	    </div>
 	    <div class="row">
 	      <div class="col-12">
-	        <h3>BBC Good Food: {{ month }}</h3>
+	        <h3>Refresh the page for another three recipes</h3>
 	      </div>
 	    </div>
 	    <div class="row">
 	      {% for recipe in recipes %}
 		      <div class="col-4 recipe">
 		        <a href="{{ recipe.url }}">
-		            <img class="thumb" src="{% static recipe.image_url %}.jpg">
+                    <div class="thumb-container">
+    		            <img class="thumb" src="{% static recipe.image_url %}.jpg">
+                    </div>
 		        </a>
 		        <a href="{{ recipe.url }}">
 		            <h4>{{ recipe.name }}</h4>
 		        </a>
-		        <p class="teaser">{{ recipe.teaser }}</p>
+		        <p class="teaser">"{{ recipe.teaser }}"</p>
 		      </div>
 	      {% endfor %}
 	    </div>

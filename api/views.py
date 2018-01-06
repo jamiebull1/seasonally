@@ -77,6 +77,13 @@ def recipe(request):
         count += 1
     return JsonResponse({'success': True, 'recipe': recipe})
 
+def fetch_recipes(n=1):
+    recipes = []
+    while len(recipes) < n:
+        recipe = fetch_recipe()
+        if recipe not in recipes:
+            recipes.append(recipe)
+    return recipes
 
 def fetch_recipe(product=None, month_num=None):
     """Fetch a random recipe from the chosen product."""
@@ -98,10 +105,13 @@ def is_valid(recipe, month_num):
     if not recipe.get('image_url', False):
         return False
     teaser = recipe.get('teaser').lower()
+    name = recipe.get('name').lower()
     for season in VALID_MONTHS:
         months = VALID_MONTHS[season]
         if season in teaser and month_num not in months:
             return False
+    if season in name and month_num not in months:
+        return False
     return True
 
 
@@ -111,7 +121,7 @@ def fetch_product(month_num=None):
         month = fetch_month()
         month_num = month.get('month_num')
     try:
-        return Product.objects.filter(months__num=month_num).order_by('?')[0]
+        return Product.objects.filter(months__num=month_num, recipe__name__isnull=False).order_by('?')[0]
     except IndexError:
         return fetch_product(month_num)
 

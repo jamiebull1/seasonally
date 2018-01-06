@@ -8,14 +8,14 @@ import datetime
 
 from django.shortcuts import render
 
-from api.views import fetch_recipe
+from api.views import fetch_recipes
 
 
 def index(request):
     """Homepage."""
     context = {}
     # fetch items for this month
-    context = {'recipes': [fetch_recipe() for _i in range(3)]}
+    context = {'recipes': fetch_recipes(n=3)}
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()
     context['abbr_month'] = abbr_month
