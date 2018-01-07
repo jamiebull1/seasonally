@@ -39,16 +39,12 @@ class GoodfoodSpider(scrapy.Spider):
     recipe_selector = '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not (contains(@href, "/collection/"))]/@href'
     def start_requests(self):
         for product in self.products:
-        # for product in self.products:
             url = 'http://www.bbcgoodfood.com/search/recipes?query=%s' % product
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         s = Selector(response)
         recipes = s.xpath(self.recipe_selector).extract()
-#        inspect_response(response, self)
-
-#        for recipe in recipes[:1]:
         for recipe in recipes:
             item = RecipeItem()
             query = response.url.split('query=')[-1]
