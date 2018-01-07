@@ -31,9 +31,10 @@ class RecipePipeline(object):
             }
         PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
         if PRODUCTION:
-            ROOT_URL = 'https://inseasonrecipes.co.uk'
+            ROOT_URL = 'http://inseasonrecipes.co.uk'
         else:
             ROOT_URL = 'http://0.0.0.0:5000'
+            ROOT_URL = 'http://inseasonrecipes.co.uk'
 
         r = requests.post(ROOT_URL + "/api/v1/add-recipe/", data)
         if r.status_code == 200 and r.json() == {'success': True}:

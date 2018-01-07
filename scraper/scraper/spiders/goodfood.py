@@ -35,7 +35,7 @@ class GoodfoodSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    products = ['Apple']
+    # products = ['Apple']
     selectors = {
         'recipe': '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not '
                   '(contains(@href, "/collection/"))]/@href',

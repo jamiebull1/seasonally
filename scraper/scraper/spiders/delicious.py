@@ -59,13 +59,13 @@ class DeliciousSpider(scrapy.Spider):
 
     def parse_recipe(self, response):
         s = Selector(response)
+        # inspect_response(response, self)
         item = response.meta['item']
-        ingredients = s.xpath("//div[@class='ingredient-box']//text()").extract()
-        if not ingredients:
-            yield None
-        ingredients = ', '.join(ingredients)
-        item['ingredients'] = unicodedata.normalize("NFKD", ingredients)
-        if item['product'].lower() not in item['ingredients'].lower():
+        item['ingredients'] = [
+            unicodedata.normalize("NFKD", i.strip())
+            for i in s.xpath("//div[@class='ingredient-box']//text()").extract() if i.strip()
+        ][1:]
+        if item['product'].lower() not in ' '.join(item['ingredients']).lower():
             yield None
         else:
             name = s.xpath("//h1[@class='post-title']//text()").extract_first()
