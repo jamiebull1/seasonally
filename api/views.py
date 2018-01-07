@@ -104,6 +104,10 @@ def is_valid(recipe, month_num):
     """Don't return items which are clearly for other seasons."""
     if not recipe.get('image_url', False):
         return False
+    if not recipe.get('name', False):
+        return False
+    if not recipe.get('teaser', False):
+        return False
     teaser = recipe.get('teaser').lower()
     name = recipe.get('name').lower()
     for season in VALID_MONTHS:
