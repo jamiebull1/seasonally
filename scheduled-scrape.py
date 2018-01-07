@@ -6,3 +6,5 @@ os.chdir('scraper/scraper')
 subprocess.call(['scrapy', 'crawl', 'goodfood'])
 # allrecipescouk
 subprocess.call(['scrapy', 'crawl', 'allrecipescouk'])
+# delicious
+subprocess.call(['scrapy', 'crawl', 'delicious'])
