@@ -108,10 +108,8 @@ def is_valid(recipe, month_num):
     name = recipe.get('name').lower()
     for season in VALID_MONTHS:
         months = VALID_MONTHS[season]
-        if season in teaser and month_num not in months:
+        if (season in teaser or season in name) and month_num not in months:
             return False
-    if season in name and month_num not in months:
-        return False
     return True
 
 
