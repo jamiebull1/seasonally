@@ -35,7 +35,7 @@ class GoodfoodSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    products = ["Apple"]
+    # products = ['Apple']
     recipe_selector = '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not (contains(@href, "/collection/"))]/@href'
     def start_requests(self):
         for product in self.products:
