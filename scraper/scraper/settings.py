@@ -74,8 +74,13 @@ ITEM_PIPELINES = {
 IMAGES_THUMBS = {
     'square': (300, 300),
 }
-IMAGES_STORE = os.path.join(
-    BASE_DIR, os.pardir, 'suggest/static/images')
+# IMAGES_STORE = os.path.join(
+#     BASE_DIR, os.pardir, 'suggest/static/images')
+
+IMAGES_STORE = 's3://seasonally-assets/images/'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
@@ -92,7 +97,4 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 HTTPCACHE_ENABLED = True
-# HTTPCACHE_EXPIRATION_SECS = 0
-# HTTPCACHE_DIR = 'httpcache'
-# HTTPCACHE_IGNORE_HTTP_CODES = []
-# HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+# HTTPCACHE_EXPIRATION_SECS = 60*60*24
