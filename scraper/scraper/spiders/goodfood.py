@@ -35,7 +35,7 @@ class GoodfoodSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    products = ['Asparagus']
+    products = ['Apple']
     selectors = {
         'recipe': '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not '
                   '(contains(@href, "/collection/"))]/@href',
@@ -71,8 +71,10 @@ class GoodfoodSpider(scrapy.Spider):
         item = response.meta['item']
         ingredients = s.xpath(self.selectors['ingredients']).extract()
         ingredients = make_list(ingredients)
-        # inspect_response(response, self)
-        item['ingredients'] = [unicodedata.normalize("NFKD", i) for i in ingredients if i.strip()]
+        item['ingredients'] = [
+            unicodedata.normalize("NFKD", i.strip())
+            for i in ingredients if i.strip()
+        ]
         if item['product'].lower() not in ' '.join(ingredients).lower():
             yield None
         else:

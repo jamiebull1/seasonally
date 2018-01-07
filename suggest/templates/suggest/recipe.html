@@ -29,30 +29,63 @@
 	      </div>
 	      <div class="col-2"></div>
 	      <div class="col-6" id="header">
-	          <h1>Seasonally</h1>
-	          <h2>Recipes for right now</h2>
+              <a href="/">
+                  <h1>Seasonally</h1>
+                  <h2>Recipes for right now</h2>
+              </a>
 	      </div>
 	    </div>
 	    <div class="row">
             <div class="col-4 recipe">
+            <br>
             <a href="{{ recipe.url }}">
                 <div class="thumb-container">
                     <img class="thumb" src="http://seasonally-assets.s3.us-east-2.amazonaws.com{{ recipe.image_url }}.jpg">
                 </div>
             </a>
-            <a href="{{ recipe.url }}">
-                <h4>{{ recipe.name }}</h4>
-            </a>
-            <p class="teaser">"{{ recipe.teaser }}"</p>
             </div>
             <div class="col-4 ingredients">
-                <h3>Ingredients</h3>
-                <p>{{ recipe.ingredients }}</p>
+                <a href="{{ recipe.url }}">
+                    <h3>{{ recipe.name }}</h3>
+                </a>
+                <p class="teaser">"{{ recipe.teaser }}"</p>
+                <a href="{{ recipe.url }}">
+                    <h3>ingredients</h3>
+                </a>
+                <br>
+                {% for ingredient in recipe.get_ingredients %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+                <a href="{{ recipe.url }}">
+                    <h3>full recipe</h3>
+                </a>
             </div>
-            <div class="col-4 ads">
-                <p>Ads</p>
+            <div class="col-4 recipe">
+                <br>
+                <a href="https://placeholder.com">
+                    <div class="thumb-container">
+                        <img class="thumb" src="http://via.placeholder.com/350x350">
+                    </div>
+                </a>
             </div>
         </div>
+	    <div class="row">
+			<div class="col-12">
+				<div class="social">
+				  	<span class="social-icon">
+			            <a href="https://twitter.com/inseasonrecipes">
+			            <img src="{% static 'images/social-icons/twitter.png' %}" height=50px></a>
+					</span>
+				</div>
+			</div>
+	    </div>
+		<div class="row footer">
+			<div class="col-12">
+				<p>Developed by <a href="http://youngbullindustries.com/">YoungBullIndustries</a> 2017 |
+                    Social icons <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+                    by <a href="https://www.alfredocreates.com/">Alfredo</a>
+			</div>
+		</div>
       </div>
 
 	</body>

@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
-from django.contrib.postgres.fields import ArrayField
+import json
+
+from django.contrib.postgres.fields import JSONField, ArrayField
 from django.db import models
 
 
@@ -20,13 +22,15 @@ class Recipe(models.Model):
     url = models.URLField(unique=True)
     image_url = models.URLField()
     teaser = models.CharField(max_length=500)
-    additional = ArrayField(models.CharField(max_length=200), null=True, blank=True)
-    ingredients = ArrayField(models.CharField(max_length=200), null=True, blank=True)
+    additional = JSONField(null=True, blank=True)
+    ingredients = JSONField(null=True, blank=True)
 
     def __unicode__(self):
         """Unicode representation for admin site."""
         return u"{0}".format(self.name)
 
+    def get_ingredients(self):
+        return json.loads(self.ingredients)['items']
 
 class Product(models.Model):
     """Model representing a seasonal product."""

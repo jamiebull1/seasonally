@@ -36,16 +36,24 @@ a {
     display: flex-inline;
 }
 .thumb-container {
-    width: 370px;
+    width: 95%;
     height: 370px;
     overflow: hidden;
     border: 1px solid #ddd;
+    margin: 2%;
 }
 .thumb {
     margin: 2% auto;
-    width: 350px;
-    height: 350px;
+    width: 95%;
+    height: 95%;
     border: 1px solid #ddd;
+}
+
+.ingredients {
+    width: 90%;
+    height: 90%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .logo {

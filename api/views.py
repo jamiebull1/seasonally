@@ -32,6 +32,7 @@ VALID_MONTHS = {
 @api_view(['POST'])
 def add_recipe(request):
     params = request.POST.copy()
+    print(params)
     recipe, created = Recipe.objects.update_or_create(
         url=params.get('url'),
         defaults={
@@ -39,14 +40,13 @@ def add_recipe(request):
             'url': params.get('url'),
             'image_url': params.get('image_url'),
             'teaser': params.get('teaser').encode('utf-8'),
-            'additional': json.dumps(params.getlist('additional')),
-            'ingredients': params.getlist('ingredients'),
+            'additional': params.get('additional'),
+            'ingredients': params.get('ingredients'),
         },
     )
     # get product from DB or add it if not yet present
     product, created = Product.objects.get_or_create(
-        name=params.get('product'),
-        default={'name': params.get('product')},
+        name=params.get('product')
     )
     # add new recipe to product recipes
     product.recipe.add(recipe)

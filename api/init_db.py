@@ -4,8 +4,15 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import os
+
 import requests
 
+PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
+if PRODUCTION:
+    ROOT_URL = 'https://inseasonrecipes.co.uk'
+else:
+    ROOT_URL = 'http://0.0.0.0:5000'
 
 PRODUCTS = {
     "Apple": [1, 2, 9, 10, 11, 12],
@@ -130,9 +137,9 @@ MONTHS = [
 if __name__ == "__main__":
     for i, month in enumerate(MONTHS, 1):
         data = {'name': month, 'num': i}
-        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-month/", data)
+        r = requests.post(ROOT_URL + "/api/v1/add-month/", data)
     for product in PRODUCTS:
         data = {'name': product, 'months': PRODUCTS.get(product)}
         print(product)
         print(PRODUCTS.get(product))
-        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-product/", data)
+        r = requests.post(ROOT_URL + "/api/v1/add-product/", data)

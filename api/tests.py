@@ -6,10 +6,9 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from .models import Recipe, Product, Month
-from .views import add_recipe
+from .models import Month
 
-from .init_db import MONTHS
+from api.init_db import MONTHS
 from api.views import fetch_recipe
 
 

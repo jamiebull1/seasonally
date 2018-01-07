@@ -4,6 +4,9 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import json
+import os
+
 import requests
 from hashlib import sha1
 import logging
@@ -23,10 +26,16 @@ class RecipePipeline(object):
             'image_url': image_url,
             'teaser': item['teaser'],
             'product': item['product'],
-            'additional': item['additional'],
-            'ingredients': item['ingredients'],
+            'additional': json.dumps({'items': item['additional']}),
+            'ingredients': json.dumps({'items': item['ingredients']}),
             }
-        r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-recipe/",data)
+        PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
+        if PRODUCTION:
+            ROOT_URL = 'https://inseasonrecipes.co.uk'
+        else:
+            ROOT_URL = 'http://0.0.0.0:5000'
+
+        r = requests.post(ROOT_URL + "/api/v1/add-recipe/", data)
         if r.status_code == 200 and r.json() == {'success': True}:
             logger.debug('Post recipe succeeded')
         else:
