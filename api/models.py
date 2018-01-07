@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
 
-import json
-
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
@@ -19,7 +17,7 @@ class Month(models.Model):
 class Recipe(models.Model):
     """Model representing a recipe on another site."""
     name = models.CharField(max_length=200)
-    url = models.URLField()
+    url = models.URLField(unique=True)
     image_url = models.URLField()
     teaser = models.CharField(max_length=500)
     additional = ArrayField(models.CharField(max_length=200), null=True, blank=True)
