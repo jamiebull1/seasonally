@@ -10,7 +10,7 @@ import requests
 
 PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
 if PRODUCTION:
-    ROOT_URL = 'https://inseasonrecipes.co.uk'
+    ROOT_URL = 'https://seasonal-ly.herokuapp.com'
 else:
     ROOT_URL = 'http://0.0.0.0:5000'
 
