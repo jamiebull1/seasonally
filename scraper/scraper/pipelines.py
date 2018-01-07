@@ -24,6 +24,7 @@ class RecipePipeline(object):
             'teaser': item['teaser'],
             'product': item['product'],
             'additional': item['additional'],
+            'ingredients': item['ingredients'],
             }
         r = requests.post("https://seasonal-ly.herokuapp.com/api/v1/add-recipe/",data)
         if r.status_code == 200 and r.json() == {'success': True}:

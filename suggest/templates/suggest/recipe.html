@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block content %}
 	<body>
+	<body>
 	  <div class="grid">
 	    <div class="row">
 	      <div class="col-4 months" id="calendar">
@@ -33,43 +34,26 @@
 	      </div>
 	    </div>
 	    <div class="row">
-	      <div class="col-12"><img src="{% static 'images/lamb.jpg' %}" width=100%></div>
-	    </div>
-	    <div class="row">
-	      <div class="col-12">
-              <h3 id="refresh"><a href="/#refresh" onclick="location.reload()">Refresh for three more</a></h3>
-	      </div>
-	    </div>
-	    <div class="row">
-	      {% for recipe in recipes %}
-		      <div class="col-4 recipe">
-		        <a href="/recipe/?pk={{ recipe.id }}">
-                    <div class="thumb-container">
-    		            <img class="thumb" src="http://seasonally-assets.s3.us-east-2.amazonaws.com{{ recipe.image_url }}.jpg">
-                    </div>
-		        </a>
-		        <a href="/recipe/?pk={{ recipe.id }}">
-		            <h4>{{ recipe.name }}</h4>
-		        </a>
-		        <p class="teaser">"{{ recipe.teaser }}"</p>
-		      </div>
-	      {% endfor %}
-	    </div>
-	    <div class="row">
-			<div class="col-12">
-				<div class="social">
-				  	<span class="social-icon">
-			            <a href="https://twitter.com/inseasonrecipes">
-			            <img src="{% static 'images/social-icons/twitter.png' %}" height=50px></a>
-					</span>
-				</div>
-			</div>
-	    </div>
-		<div class="row footer">
-			<div class="col-12">
-				<p>Developed by <a href="http://youngbullindustries.com/">YoungBullIndustries</a> 2017 | Social icons <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> by <a href="https://www.alfredocreates.com/">Alfredo</a>
-			</div>
-		</div>
-	  </div>
+            <div class="col-4 recipe">
+            <a href="{{ recipe.url }}">
+                <div class="thumb-container">
+                    <img class="thumb" src="http://seasonally-assets.s3.us-east-2.amazonaws.com{{ recipe.image_url }}.jpg">
+                </div>
+            </a>
+            <a href="{{ recipe.url }}">
+                <h4>{{ recipe.name }}</h4>
+            </a>
+            <p class="teaser">"{{ recipe.teaser }}"</p>
+            </div>
+            <div class="col-4 ingredients">
+                <h3>Ingredients</h3>
+                <p>{{ recipe.ingredients }}</p>
+            </div>
+            <div class="col-4 ads">
+                <p>Ads</p>
+            </div>
+        </div>
+      </div>
+
 	</body>
 {% endblock %}

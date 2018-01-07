@@ -35,8 +35,17 @@ class GoodfoodSpider(scrapy.Spider):
         "Spring onion", "Strawberry", "Swede", "Sweet potato", "Sweetcorn", "Swiss chard", "Tomato", "Tuna", "Turkey",
         "Turnip", "Venison", "Watercress", "Watermelon", "Whiting",
     ]
-    # products = ['Apple']
-    recipe_selector = '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not (contains(@href, "/collection/"))]/@href'
+    products = ['Asparagus']
+    selectors = {
+        'recipe': '//a[starts-with(@href, "/recipes/") and not (contains(@href, "/category/")) and not '
+                  '(contains(@href, "/collection/"))]/@href',
+        'ingredients': "//li[@class='ingredients-list__item']//text()[not(ancestor::span)]",
+        'name': ".recipe-header__title::text",
+        'image_url': "//img[@itemprop='image']/@src",
+        'teaser': "//div[@class='recipe-header__description']//text()",
+        'additional': '//ul[@class="additional-info"]//text()',
+        }
+
     def start_requests(self):
         for product in self.products:
             url = 'http://www.bbcgoodfood.com/search/recipes?query=%s' % product
@@ -44,7 +53,7 @@ class GoodfoodSpider(scrapy.Spider):
 
     def parse(self, response):
         s = Selector(response)
-        recipes = s.xpath(self.recipe_selector).extract()
+        recipes = s.xpath(self.selectors['recipe']).extract()
         for recipe in recipes:
             item = RecipeItem()
             query = response.url.split('query=')[-1]
@@ -60,22 +69,39 @@ class GoodfoodSpider(scrapy.Spider):
     def parse_recipe(self, response):
         s = Selector(response)
         item = response.meta['item']
-        ingredients = s.xpath(
-            "//div[@class='ingredients-list']//text()").extract()
-        ingredients = ', '.join(ingredients)
-        item['ingredients'] = unicodedata.normalize("NFKD", ingredients)
-        if item['product'].lower() not in item['ingredients'].lower():
+        ingredients = s.xpath(self.selectors['ingredients']).extract()
+        ingredients = make_list(ingredients)
+        # inspect_response(response, self)
+        item['ingredients'] = [unicodedata.normalize("NFKD", i) for i in ingredients if i.strip()]
+        if item['product'].lower() not in ' '.join(ingredients).lower():
             yield None
         else:
-            name = s.css(".recipe-header__title::text").extract_first()
+            name = s.css(self.selectors['name']).extract_first()
             item['name'] = unicodedata.normalize("NFKD", name)
             item['url'] = response.url
-            image_url = s.xpath(
-                "//img[@itemprop='image']/@src").extract_first()
+            image_url = s.xpath(self.selectors['image_url']).extract_first()
             item['image_urls'] = [urljoin(text_type(self.root), text_type(image_url))]
-    #        inspect_response(response, self)
-            teaser = s.xpath(
-                "//div[@class='recipe-header__description']//text()").extract_first()
+            teaser = s.xpath(self.selectors['teaser']).extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser)
-            item['additional'] = s.xpath('//ul[@class="additional-info"]//text()').extract()
+            item['additional'] = s.xpath(self.selectors['additional']).extract()
             yield item
+
+
+def make_list(ingredients):
+    as_list = []
+    item = ''
+    for i, text in enumerate(ingredients):
+        if not item:
+            item = text
+        else:
+            item += text
+        if item.endswith(' '):
+            continue
+        try:
+            if ingredients[i+1].startswith(' ') or ingredients[i+1].startswith(','):
+                continue
+        except IndexError:
+            as_list.append(item)
+            return as_list
+        as_list.append(item)
+        item = ''

@@ -9,6 +9,7 @@ import json
 
 from django.conf import settings
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 import requests
 from rest_framework.decorators import api_view
 from six.moves.urllib.parse import urljoin
@@ -31,19 +32,22 @@ VALID_MONTHS = {
 @api_view(['POST'])
 def add_recipe(request):
     params = request.POST.copy()
-    recipe = Recipe()
-    recipe.name = params.get('name').encode('utf-8')
-    recipe.url = params.get('url')
-    recipe.image_url = params.get('image_url')
-    recipe.teaser = params.get('teaser').encode('utf-8')
-    recipe.additional = json.dumps(params.getlist('additional'))
-    recipe.save()
+    recipe, created = Recipe.objects.update_or_create(
+        url=params.get('url'),
+        defaults={
+            'name': params.get('name').encode('utf-8'),
+            'url': params.get('url'),
+            'image_url': params.get('image_url'),
+            'teaser': params.get('teaser').encode('utf-8'),
+            'additional': json.dumps(params.getlist('additional')),
+            'ingredients': params.getlist('ingredients'),
+        },
+    )
     # get product from DB or add it if not yet present
-    product = Product.objects.filter(name=params.get('product')).first()
-    if not product:
-        product = Product()
-        product.name = params.get('product')
-        product.save()
+    product, created = Product.objects.get_or_create(
+        name=params.get('product'),
+        default={'name': params.get('product')},
+    )
     # add new recipe to product recipes
     product.recipe.add(recipe)
     return JsonResponse({'success': True})
@@ -74,22 +78,27 @@ def add_month(request):
 @api_view(['GET'])
 def recipe(request):
     recipe = None
-    count = 0
-    while not recipe and count < 20:
+    tries_left = 10
+    while not recipe and tries_left:
         recipe = fetch_recipe()
-        count += 1
+        tries_left -= 1
     return JsonResponse({'success': True, 'recipe': recipe})
 
 
 def fetch_recipes(n=1):
     recipes = []
-    tries_left = 100
+    tries_left = 10
     while len(recipes) < n and tries_left:
         recipe = fetch_recipe()
         if recipe not in recipes:
             recipes.append(recipe)
         tries_left -= 1
     return recipes
+
+
+def fetch_recipe_by_key(pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    return recipe
 
 
 def fetch_recipe(product=None, month_num=None):
