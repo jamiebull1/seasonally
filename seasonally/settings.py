@@ -169,6 +169,7 @@ if PRODUCTION:
     DEBUG = False
     ALLOWED_HOSTS = [
         'seasonal-ly.herokuapp.com',
+        'www.inseasonrecipes.co.uk',
     ]
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=500)
