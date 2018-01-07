@@ -7,8 +7,11 @@ from __future__ import unicode_literals
 import datetime
 import json
 
+from django.conf import settings
 from django.http import JsonResponse
+import requests
 from rest_framework.decorators import api_view
+from six.moves.urllib.parse import urljoin
 
 from .models import Recipe, Product, Month
 
@@ -77,13 +80,17 @@ def recipe(request):
         count += 1
     return JsonResponse({'success': True, 'recipe': recipe})
 
+
 def fetch_recipes(n=1):
     recipes = []
-    while len(recipes) < n:
+    tries_left = 100
+    while len(recipes) < n and tries_left:
         recipe = fetch_recipe()
         if recipe not in recipes:
             recipes.append(recipe)
+        tries_left -= 1
     return recipes
+
 
 def fetch_recipe(product=None, month_num=None):
     """Fetch a random recipe from the chosen product."""
@@ -94,7 +101,7 @@ def fetch_recipe(product=None, month_num=None):
         month = fetch_month()
         month_num = month.get('month_num')
     for recipe in recipes:
-        if is_valid(recipe, month_num):
+        if is_valid(recipe, month_num) and is_complete(recipe):
             return recipe
         else:
             fetch_recipe(month_num=month_num)
@@ -102,12 +109,6 @@ def fetch_recipe(product=None, month_num=None):
 
 def is_valid(recipe, month_num):
     """Don't return items which are clearly for other seasons."""
-    if not recipe.get('image_url', False):
-        return False
-    if not recipe.get('name', False):
-        return False
-    if not recipe.get('teaser', False):
-        return False
     teaser = recipe.get('teaser').lower()
     name = recipe.get('name').lower()
     for season in VALID_MONTHS:
@@ -115,6 +116,20 @@ def is_valid(recipe, month_num):
         if (season in teaser or season in name) and month_num not in months:
             return False
     return True
+
+
+def is_complete(recipe):
+    url = recipe.get('image_url', '').strip()
+    url = image_exists(url)
+    name = recipe.get('name', '').strip()
+    teaser = recipe.get('teaser', '').strip()
+    return all([url, name, teaser])
+
+
+def image_exists(url):
+    url = urljoin(settings.S3_BUCKET, url + '.jpg')
+    r = requests.get(url)
+    return r.status_code == 200
 
 
 def fetch_product(month_num=None):
