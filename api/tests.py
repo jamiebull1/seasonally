@@ -99,5 +99,3 @@ class GetRecipeTest(TestCase):
             recipe = fetch_recipe(None, 5)
             self.assertEqual(recipe, None)
             self.assertEqual(recipe, None)
-        
-        
