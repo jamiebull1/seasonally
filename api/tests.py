@@ -93,11 +93,9 @@ class GetRecipeTest(TestCase):
     
     def testMonthFilters(self):
         for n in 6, 7, 8:
-            recipe = fetch_recipe(None, n)
+            recipe, _product = fetch_recipe(None, n)
             self.assertEqual(recipe.get('name'), 'Summer spam')
         for n in 1, 2, 3, 4, 5, 9, 10, 11, 12:
-            recipe = fetch_recipe(None, 5)
+            recipe, _product = fetch_recipe(None, 5)
             self.assertEqual(recipe, None)
             self.assertEqual(recipe, None)
-        
-        
