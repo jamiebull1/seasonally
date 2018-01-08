@@ -62,9 +62,8 @@ class AllrecipesukSpider(scrapy.Spider):
         # inspect_response(response, self)
         item = response.meta['item']
         ingredients = s.xpath("//span[@itemprop='ingredients']//text()").extract()
-        ingredients = ', '.join(ingredients)
-        item['ingredients'] = unicodedata.normalize("NFKD", ingredients)
-        if item['product'].lower() not in item['ingredients'].lower():
+        item['ingredients'] = [unicodedata.normalize("NFKD", i.strip()) for i in ingredients]
+        if item['product'].lower() not in ' '.join(ingredients).lower():
             yield None
         else:
             name = s.xpath(
