@@ -28,6 +28,7 @@ class RecipePipeline(object):
             'product': item['product'],
             'additional': json.dumps({'items': item['additional']}),
             'ingredients': json.dumps({'items': item['ingredients']}),
+            'source': item['source'],
             }
         PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
         if PRODUCTION:

@@ -77,4 +77,5 @@ class AllrecipesukSpider(scrapy.Spider):
                 "//p[@class='description']//text()").extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser).strip()
             item['additional'] = []
+            item['source'] = self.name
             yield item

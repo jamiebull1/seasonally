@@ -24,6 +24,7 @@ class Recipe(models.Model):
     teaser = models.CharField(max_length=500)
     additional = JSONField(null=True, blank=True)
     ingredients = JSONField(null=True, blank=True)
+    source = models.CharField(max_length=64, null=True)
 
     def __unicode__(self):
         """Unicode representation for admin site."""

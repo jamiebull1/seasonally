@@ -42,6 +42,7 @@ def add_recipe(request):
             'teaser': params.get('teaser').encode('utf-8'),
             'additional': params.get('additional'),
             'ingredients': params.get('ingredients'),
+            'source': params.get('source'),
         },
     )
     # get product from DB or add it if not yet present

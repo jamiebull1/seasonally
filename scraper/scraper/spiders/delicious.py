@@ -76,4 +76,5 @@ class DeliciousSpider(scrapy.Spider):
             teaser = s.xpath("//span[@class='teaser_large']//text()").extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser).strip()
             item['additional'] = []
+            item['source'] = self.name
             yield item

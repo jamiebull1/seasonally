@@ -86,6 +86,7 @@ class GoodfoodSpider(scrapy.Spider):
             teaser = s.xpath(self.selectors['teaser']).extract_first()
             item['teaser'] = unicodedata.normalize("NFKD", teaser)
             item['additional'] = s.xpath(self.selectors['additional']).extract()
+            item['source'] = self.name
             yield item
 
 
