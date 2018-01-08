@@ -5,7 +5,6 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import datetime
-import json
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -28,6 +27,11 @@ VALID_MONTHS = {
     'festive': [12],
     }
 
+ACTIVE_SOURCES = {
+    'legacy',
+    'delicious',
+    'goodfood',
+}
 
 @api_view(['POST'])
 def add_recipe(request):
@@ -118,6 +122,25 @@ def fetch_recipe(product=None, month_num=None):
 
 
 def is_valid(recipe, month_num):
+    """Don't return items which are invalid for some reason."""
+    return all([
+        is_seasonal(recipe, month_num),
+        is_complete(recipe),
+        is_active_source(recipe),
+    ])
+
+
+def is_active_source(recipe):
+    """Don't return recipe items from sources we don't want to display."""
+    source = recipe.get('source')  # we will remove `legacy` from ACTIVE_SOURCES eventually
+    if not source:
+        source = 'legacy'
+    if source in ACTIVE_SOURCES:
+        return True
+    return False
+
+
+def is_seasonal(recipe, month_num):
     """Don't return items which are clearly for other seasons."""
     teaser = recipe.get('teaser').lower()
     name = recipe.get('name').lower()
