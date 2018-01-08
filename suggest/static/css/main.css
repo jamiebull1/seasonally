@@ -35,6 +35,9 @@ a {
     text-align: center;
     display: flex-inline;
 }
+.centred {
+    text-align: center;
+}
 .thumb-container {
     width: 95%;
     height: 370px;

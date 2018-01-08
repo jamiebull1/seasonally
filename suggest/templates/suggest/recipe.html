@@ -46,19 +46,19 @@
             </div>
             <div class="col-4 ingredients">
                 <a href="{{ recipe.url }}">
-                    <h3>{{ recipe.name }}</h3>
+                    <h3 class="centred">{{ recipe.name }}</h3>
                 </a>
                 <p class="teaser">"{{ recipe.teaser }}"</p>
                 <a href="{{ recipe.url }}">
-                    <h3>ingredients</h3>
+                    <h3 class="centred">ingredients</h3>
                 </a>
                 <br>
                 {% for ingredient in recipe.get_ingredients %}
                     <li>{{ ingredient }}</li>
                 {% endfor %}
-                <a href="{{ recipe.url }}">
-                    <h3>full recipe</h3>
-                </a>
+                <h3 class="centred">
+                    <a href="{{ recipe.url }}">full recipe</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/#refresh">three more</a>
+                </h3>
             </div>
             <div class="col-4 recipe">
                 <br>
