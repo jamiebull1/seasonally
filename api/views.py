@@ -85,9 +85,9 @@ def recipe(request):
     recipe = None
     tries_left = 10
     while not recipe and tries_left:
-        recipe = fetch_recipe()
+        recipe, product = fetch_recipe()
         tries_left -= 1
-    return JsonResponse({'success': True, 'recipe': recipe})
+    return JsonResponse({'success': True, 'recipe': recipe, 'product': product.name})
 
 
 @api_view(['GET'])
@@ -101,7 +101,7 @@ def fetch_recipes(n=1):
     recipes = []
     tries_left = 10
     while len(recipes) < n and tries_left:
-        recipe = fetch_recipe()
+        recipe, _product = fetch_recipe()
         if recipe not in recipes:
             recipes.append(recipe)
         tries_left -= 1
@@ -123,7 +123,7 @@ def fetch_recipe(product=None, month_num=None):
         month_num = month.get('month_num')
     for recipe in recipes:
         if is_valid(recipe, month_num) and is_complete(recipe):
-            return recipe
+            return recipe, product
         else:
             fetch_recipe(month_num=month_num)
 
