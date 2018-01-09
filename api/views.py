@@ -90,6 +90,13 @@ def recipe(request):
     return JsonResponse({'success': True, 'recipe': recipe})
 
 
+@api_view(['GET'])
+def product(request):
+    """Fetch a random seasonal product from the database."""
+    product = fetch_product()
+    return JsonResponse({'success': True, 'product': product.name})
+
+
 def fetch_recipes(n=1):
     recipes = []
     tries_left = 10

@@ -13,7 +13,7 @@ from api.views import fetch_recipe
 
 
 class AddRecipeTest(TestCase):
-    """Tests for /api/v1/add-recipe/ URL."""
+    """Tests for /api/v1/add-recipe/ URL. """
     def test_add_recipe_get(self):
         """Test we can't reach /api/v1/add-recipe/ with GET."""
         response = self.client.get('/api/v1/add-recipe/')
