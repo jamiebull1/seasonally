@@ -4,14 +4,35 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from hashlib import sha1
 import json
+import logging
 import os
 
+# from PIL import Image, ImageChops
 import requests
-from hashlib import sha1
-import logging
+# from scrapy.pipelines.images import ImagesPipeline
 
 logger = logging.getLogger(__name__)
+
+
+# class MyImagesPipeline(ImagesPipeline):
+#
+#     pass
+#
+#
+# def trim(im):
+#     bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
+#     diff = ImageChops.difference(im, bg)
+#     diff = ImageChops.add(diff, diff, 2.0, -100)
+#     bbox = diff.getbbox()
+#     if bbox:
+#         return im.crop(bbox)
+#
+# im = Image.open("bord3.jpg")
+# im = trim(im)
+# im.show()
+#
 
 
 class RecipePipeline(object):
