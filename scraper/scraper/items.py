@@ -16,3 +16,4 @@ class RecipeItem(scrapy.Item):
     product = scrapy.Field()
     ingredients = scrapy.Field()
     additional = scrapy.Field()
+    source = scrapy.Field()
