@@ -9,9 +9,9 @@ from __future__ import unicode_literals
 from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from suggest import views
-
 
 urlpatterns = [
     url(r'^$', views.index),
@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^recipe/', views.recipe),
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('api.urls')),
+    url(r'^robots\.txt/$', TemplateView.as_view(
+        template_name='robots.txt', content_type='text/plain')),
 ]
