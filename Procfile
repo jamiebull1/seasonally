@@ -1,1 +1,1 @@
-web: gunicorn seasonally.wsgi
+web: gunicorn seasonally.wsgi --log-level DEBUG
