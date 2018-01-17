@@ -137,7 +137,7 @@ LOGGING = {
             'formatter': 'verbose'
         },
         'sentry': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'class': 'raven.handlers.logging.SentryHandler',
             'dsn': os.environ.get('SENTRY_DSN'),
         },
