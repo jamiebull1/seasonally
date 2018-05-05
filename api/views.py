@@ -5,6 +5,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import datetime
+import os
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -32,11 +33,12 @@ VALID_MONTHS = {
     'festive': [12],
     }
 
-ACTIVE_SOURCES = {
+ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
     'legacy',
     'delicious',
     'goodfood',
     'bbcgoodfood',
+    'veganrecipeclub',
 }
 
 
