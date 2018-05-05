@@ -172,7 +172,7 @@ PRODUCTION = os.getenv('DJANGO_PRODUCTION', False)
 if PRODUCTION:
     print("In production")
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-    DEBUG = os.getenv('DEBUG', False)
+    DEBUG = False
     ALLOWED_HOSTS = [
         'seasonal-ly.herokuapp.com',
         'www.inseasonrecipes.co.uk',

@@ -24,13 +24,12 @@ VALID_MONTHS = {
     'christmas': [12],
     'spring': [3, 4, 5],
     'summer': [6, 7, 8],
-    'summery': [6, 7, 8],
     'autumn': [9, 10, 11],
-    'autumnal': [9, 10, 11],
     'winter': [12, 1, 2],
-    'wintery': [12, 1, 2],
     'halloween': [10],
     'festive': [12],
+    'diwali': [10],
+    'bonfire night': [10],
     }
 
 ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
