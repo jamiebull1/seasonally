@@ -12,17 +12,22 @@ from django.shortcuts import get_object_or_404
 import requests
 from rest_framework.decorators import api_view
 from six.moves.urllib.parse import urljoin
+import structlog
 
 from .models import Recipe, Product, Month
 
+log = structlog.get_logger()
 
 VALID_MONTHS = {
     'easter': [4, 5],
     'christmas': [12],
     'spring': [3, 4, 5],
     'summer': [6, 7, 8],
+    'summery': [6, 7, 8],
     'autumn': [9, 10, 11],
+    'autumnal': [9, 10, 11],
     'winter': [12, 1, 2],
+    'wintery': [12, 1, 2],
     'halloween': [10],
     'festive': [12],
     }
@@ -31,13 +36,14 @@ ACTIVE_SOURCES = {
     'legacy',
     'delicious',
     'goodfood',
+    'bbcgoodfood',
 }
+
 
 @api_view(['POST'])
 def add_recipe(request):
     params = request.POST.copy()
-    print(params)
-    recipe, created = Recipe.objects.update_or_create(
+    Recipe.objects.update_or_create(
         url=params.get('url'),
         defaults={
             'name': params.get('name').encode('utf-8'),
@@ -50,23 +56,23 @@ def add_recipe(request):
         },
     )
     # get product from DB or add it if not yet present
-    product, created = Product.objects.get_or_create(
+    seasonal_product, created = Product.objects.get_or_create(
         name=params.get('product')
     )
     # add new recipe to product recipes
-    product.recipe.add(recipe)
+    seasonal_product.recipe.add(recipe)
     return JsonResponse({'success': True})
 
 
 @api_view(['POST'])
 def add_product(request):
     params = request.POST.copy()
-    product = Product()
-    product.name = params.get('name').encode('utf-8')
-    product.save()
+    seasonal_product = Product()
+    seasonal_product.name = params.get('name').encode('utf-8')
+    seasonal_product.save()
     months = Month.objects.filter(num__in=params.getlist('months'))
-    product.months.set(months)
-    product.save()
+    seasonal_product.months.set(months)
+    seasonal_product.save()
     return JsonResponse({'success': True})
 
 
@@ -82,94 +88,108 @@ def add_month(request):
 
 @api_view(['GET'])
 def recipe(request):
-    recipe = None
-    tries_left = 10
-    while not recipe and tries_left:
-        recipe, product = fetch_recipe()
+    seasonal_recipe = None
+    seasonal_product = None
+    tries_left = 3
+    while not seasonal_recipe and tries_left:
+        seasonal_recipe, seasonal_product = fetch_recipe()
         tries_left -= 1
-    return JsonResponse({'success': True, 'recipe': recipe, 'product': product.name})
+    if not seasonal_recipe:
+        res = JsonResponse({'success': False, 'recipe': None, 'product': None})
+    else:
+        res = JsonResponse({'success': True, 'recipe': seasonal_recipe, 'product': seasonal_product.name})
+    return res
 
 
 @api_view(['GET'])
 def product(request):
     """Fetch a random seasonal product from the database."""
-    product = fetch_product()
-    return JsonResponse({'success': True, 'product': product.name})
+    seasonal_product = fetch_product()
+    return JsonResponse({'success': True, 'product': seasonal_product.name})
 
 
 def fetch_recipes(n=1):
     recipes = []
-    tries_left = 10
+    tries_left = 3
     while len(recipes) < n and tries_left:
-        recipe, _product = fetch_recipe()
-        if recipe not in recipes:
-            recipes.append(recipe)
+        seasonal_recipe, _product = fetch_recipe()
+        if seasonal_recipe not in recipes:
+            recipes.append(seasonal_recipe)
         tries_left -= 1
     return recipes
 
 
 def fetch_recipe_by_key(pk):
-    recipe = get_object_or_404(Recipe, pk=pk)
-    return recipe
+    seasonal_recipe = get_object_or_404(Recipe, pk=pk)
+    return seasonal_recipe
 
 
-def fetch_recipe(product=None, month_num=None):
+def fetch_recipe(seasonal_product=None, month_num=None):
     """Fetch a random recipe from the chosen product."""
-    if not product:
-        product = fetch_product()
-    recipes = product.recipe.values().order_by('?')
+    if not seasonal_product:
+        seasonal_product = fetch_product()
+    recipes = seasonal_product.recipe.values().order_by('?')
     if not month_num:
         month = fetch_month()
         month_num = month.get('month_num')
-    for recipe in recipes:
-        if is_valid(recipe, month_num) and is_complete(recipe):
-            return recipe, product
+        month_name = month.get('month')
+    for seasonal_recipe in recipes:
+        if is_valid(seasonal_recipe, month_num) and is_complete(seasonal_recipe):
+            return seasonal_recipe, seasonal_product
         else:
-            fetch_recipe(month_num=month_num)
+            return fetch_recipe(month_num=month_num)
 
 
-def is_valid(recipe, month_num):
+def is_valid(seasonal_recipe, month_num):
     """Don't return items which are invalid for some reason."""
     return all([
-        is_seasonal(recipe, month_num),
-        is_complete(recipe),
-        is_active_source(recipe),
+        is_seasonal(seasonal_recipe, month_num),
+        is_complete(seasonal_recipe),
+        is_active_source(seasonal_recipe),
     ])
 
 
-def is_active_source(recipe):
+def is_active_source(seasonal_recipe):
     """Don't return recipe items from sources we don't want to display."""
-    source = recipe.get('source')  # we will remove `legacy` from ACTIVE_SOURCES eventually
+    source = seasonal_recipe.get('source')  # we will remove `legacy` from ACTIVE_SOURCES eventually
     if not source:
         source = 'legacy'
     if source in ACTIVE_SOURCES:
+        log.debug('api.recipe.is_valid', active=True)
         return True
+    log.debug('api.recipe.is_valid', active=False)
     return False
 
 
-def is_seasonal(recipe, month_num):
+def is_seasonal(seasonal_recipe, month_num):
     """Don't return items which are clearly for other seasons."""
-    teaser = recipe.get('teaser').lower()
-    name = recipe.get('name').lower()
+    teaser = seasonal_recipe.get('teaser').lower()
+    name = seasonal_recipe.get('name').lower()
     for season in VALID_MONTHS:
         months = VALID_MONTHS[season]
         if (season in teaser or season in name) and month_num not in months:
+            log.debug('api.recipe.is_valid', seasonal=False)
             return False
+    log.debug('api.recipe.is_valid', seasonal=True)
     return True
 
 
-def is_complete(recipe):
-    url = recipe.get('image_url', '').strip()
+def is_complete(seasonal_recipe):
+    url = seasonal_recipe.get('image_url', '').strip()
     url = image_exists(url)
-    name = recipe.get('name', '').strip()
-    teaser = recipe.get('teaser', '').strip()
-    return all([url, name, teaser])
+    name = seasonal_recipe.get('name', '').strip()
+    teaser = seasonal_recipe.get('teaser', '').strip()
+    complete = all([url, name, teaser])
+    log.debug('api.recipe.is_valid', complete=complete)
+    return complete
 
 
 def image_exists(url):
     url = urljoin(settings.S3_BUCKET, url + '.jpg')
     r = requests.get(url)
-    return r.status_code == 200
+    img_exists = r.status_code == 200
+    log.debug('api.recipe.is_valid', img_exists=img_exists)
+    return img_exists
 
 
 def fetch_product(month_num=None):

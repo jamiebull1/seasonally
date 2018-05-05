@@ -139,7 +139,7 @@ LOGGING = {
         'sentry': {
             'level': 'DEBUG',
             'class': 'raven.handlers.logging.SentryHandler',
-            'dsn': os.environ.get('SENTRY_DSN'),
+            'dsn': os.getenv('SENTRY_DSN'),
         },
     },
     'loggers': {
@@ -160,14 +160,19 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [],
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
-PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
+RAVEN_CONFIG = {
+    'dsn': os.getenv('SENTRY_DSN'),
+    'release': 'not_set',
+}
+
+PRODUCTION = os.getenv('DJANGO_PRODUCTION', False)
 if PRODUCTION:
     print("In production")
-    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-    DEBUG = False
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+    DEBUG = os.getenv('DEBUG', False)
     ALLOWED_HOSTS = [
         'seasonal-ly.herokuapp.com',
         'www.inseasonrecipes.co.uk',
