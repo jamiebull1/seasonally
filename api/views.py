@@ -45,7 +45,7 @@ ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
 @api_view(['POST'])
 def add_recipe(request):
     params = request.POST.copy()
-    Recipe.objects.update_or_create(
+    seasonal_recipe, created = Recipe.objects.update_or_create(
         url=params.get('url'),
         defaults={
             'name': params.get('name').encode('utf-8'),
@@ -62,7 +62,7 @@ def add_recipe(request):
         name=params.get('product')
     )
     # add new recipe to product recipes
-    seasonal_product.recipe.add(recipe)
+    seasonal_product.recipe.add(seasonal_recipe)
     return JsonResponse({'success': True})
 
 
