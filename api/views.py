@@ -133,7 +133,6 @@ def fetch_recipe(seasonal_product=None, month_num=None):
     if not month_num:
         month = fetch_month()
         month_num = month.get('month_num')
-        month_name = month.get('month')
     for seasonal_recipe in recipes:
         if is_valid(seasonal_recipe, month_num) and is_complete(seasonal_recipe):
             return seasonal_recipe, seasonal_product
