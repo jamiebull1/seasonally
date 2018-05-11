@@ -5,6 +5,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import datetime
+import json
 import os
 
 from django.conf import settings
@@ -166,7 +167,7 @@ def is_seasonal(seasonal_recipe, month_num):
     """Don't return items which are clearly for other seasons."""
     teaser = seasonal_recipe.get('teaser').lower()
     name = seasonal_recipe.get('name').lower()
-    tags = [tag.lower() for tag in seasonal_recipe.get('additional')['items']]
+    tags = [tag.lower() for tag in json.loads(seasonal_recipe.get('additional'))['items']]
     for season in VALID_MONTHS:
         months = VALID_MONTHS[season]
         if (season in teaser or season in name or season in ' '.join(tags)) and month_num not in months:
