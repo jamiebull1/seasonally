@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import json
 
-from django.contrib.postgres.fields import JSONField, ArrayField
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 
@@ -35,7 +35,7 @@ class Recipe(models.Model):
 
 class Product(models.Model):
     """Model representing a seasonal product."""
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     months = models.ManyToManyField(Month)  # available in several months
     recipe = models.ManyToManyField(Recipe)  # belong to several recipes
 

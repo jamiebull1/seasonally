@@ -1,26 +1,18 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-import os
-
 import requests
 
-PRODUCTION = os.environ.get('DJANGO_PRODUCTION', False)
-if PRODUCTION:
-    ROOT_URL = 'http://inseasonrecipes.co.uk'
-else:
-    ROOT_URL = 'http://0.0.0.0:5000'
+ROOT_URL = 'http://inseasonrecipes.co.uk'
+
 
 PRODUCTS = {
+    "Angelica": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "Anise": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "Arugula": [3, 4, 5, 6, 7, 8],
     "Apple": [1, 2, 9, 10, 11, 12],
     "Apricot": [5, 6, 7, 8, 9],
     "Asparagus": [5, 6, 7],
     "Aubergine": [5, 6, 7, 8, 9, 10],
     "Banana": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    "Basil": [6, 7, 8],
+    "Basil": [5, 6, 7, 8, 9],
     "Beef": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Beetroot": [1, 7, 8, 9, 10, 11, 12],
     "Blackberry": [7, 8, 9, 10],
@@ -30,6 +22,8 @@ PRODUCTS = {
     "Broccoli": [7, 8, 9, 10],
     "Brussels sprouts": [1, 2, 3, 10, 11, 12],
     "Cabbage": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    "Caraway": [4, 5, 6, 7, 8],
+    "Cardamom": [1, 9, 10, 11, 12],
     "Carrot": [5, 6, 7, 8, 9],
     "Cauliflower": [1, 2, 3, 4, 12],
     "Cavolo nero": [6, 7, 8, 9, 10],
@@ -41,20 +35,28 @@ PRODUCTS = {
     "Chicken": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Chicory": [1, 2, 3],
     "Clementine": [1, 2, 11, 12],
+    "Cloves": [1, 9, 10, 11, 12],
     "Cod": [1, 2, 3, 4],
+    "Coriander": [3, 4, 5, 6, 7, 8, 9],
     "Courgette": [6, 7, 8, 9],
     "Courgette flower": [6, 7, 8],
     "Crab": [4, 5, 6, 7, 8, 9, 10, 11],
     "Cranberry": [10, 11, 12],
+    "Cranberries": [10, 11, 12],
+    "Cumin": [4, 5, 6, 7, 8],
     "Damson": [8, 9],
     "Date": [1, 10, 11, 12],
+    "Dates": [1, 10, 11, 12],
+    "Dill": [3, 4, 5, 6, 7, 8, 9],
     "Duck": [10, 11, 12],
     "Fennel bulb": [6, 7, 8, 9],
+    "Fenugreek": [8, 9, 10, 11, 12],
     "Fig": [7, 8, 9, 10],
     "Garlic": [6, 7, 8, 9, 10],
     "Globe artichoke": [5, 6, 7, 8, 9, 10, 11],
     "Goose": [1, 8, 9, 10, 11, 12],
     "Gooseberry": [5, 6, 7, 8, 9],
+    "Gooseberries": [5, 6, 7, 8, 9],
     "Grapefruit": [1, 2, 3, 4, 5, 12],
     "Grouse": [8, 9, 10, 11, 12],
     "Guinea fowl": [8, 9, 10, 11],
@@ -65,10 +67,13 @@ PRODUCTS = {
     "Kohlrabi": [7, 8, 9, 10, 11],
     "Lamb": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Lamb's lettuce": [5, 6, 7, 8, 9, 10, 11],
+    "Lavender": [6, 7],
     "Leek": [1, 2, 3, 9, 10, 11, 12],
     "Lemon": [1, 2, 3],
+    "Lemongrass": [1, 2, 3, 9, 10, 11, 12],
     "Lettuce": [4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Mackerel": [5, 6, 7, 8, 9, 10],
+    "Marjoram": [1, 2, 3, 6, 7, 8, 9, 10, 11, 12],
     "Marrow": [7, 8, 9],
     "Mint": [5, 6, 7, 8, 9],
     "Mussels": [1, 2, 3, 10, 11, 12],
@@ -76,6 +81,7 @@ PRODUCTS = {
     "New potatoes": [4, 5, 6, 7],
     "Onion": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Orange": [1, 2, 3],
+    "Oregano": [1, 2, 3, 6, 7, 8, 9, 10, 11, 12],
     "Oyster": [1, 2, 3, 4, 8, 9, 10, 11, 12],
     "Pak choi": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Parsnip": [1, 2, 3, 9, 10, 11, 12],
@@ -88,14 +94,16 @@ PRODUCTS = {
     "Pork": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Potato": [3, 4, 5, 6, 7],
     "Pumpkin": [9, 10, 11, 12],
-    "Purple sprouting broccoli": [1, 2, 3, 4],
+    "Purple sprouting": [1, 2, 3, 4],
     "Quince": [9, 10, 11, 12],
     "Radicchio": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "Radish": [4, 5, 6, 7, 8, 9, 10],
     "Raspberry": [6, 7, 8, 9],
     "Redcurrant": [6, 7, 8, 9],
     "Rhubarb": [1, 2, 3, 4, 5, 6],
+    "Rocket": [3, 4, 5, 6, 7, 8],
     "Runner bean": [6, 7, 8, 9, 10, 11],
+    "Sage": [5, 6],
     "Salmon": [3, 4, 5, 6, 7, 8, 9],
     "Salsify": [1, 9, 10, 11, 12],
     "Samphire": [7, 8],
@@ -109,6 +117,8 @@ PRODUCTS = {
     "Sweet potato": [1, 2, 3, 10, 11, 12],
     "Sweetcorn": [8, 9],
     "Swiss chard": [7, 8, 9, 10, 11],
+    "Tarragon": [3, 4, 5, 6, 7, 8, 9],
+    "Thyme": [3, 4, 5, 6, 7, 8, 9],
     "Tomato": [5, 6, 7, 8, 9, 10],
     "Tuna": [5, 6, 7, 8, 9],
     "Turkey": [12],
@@ -116,9 +126,8 @@ PRODUCTS = {
     "Venison": [1, 2, 10, 11, 12],
     "Watercress": [3, 4, 5, 6, 7, 8, 9],
     "Watermelon": [6, 7, 8],
-    "Whiting": [1, 2, 6, 7, 8, 9, 10, 11, 12]
-    }
-
+    "Whiting": [1, 2, 6, 7, 8, 9, 10, 11, 12],
+}
 MONTHS = [
     "January",
     "February",
@@ -135,11 +144,11 @@ MONTHS = [
     ]
 
 if __name__ == "__main__":
-    for i, month in enumerate(MONTHS, 1):
-        data = {'name': month, 'num': i}
-        r = requests.post(ROOT_URL + "/api/v1/add-month/", data)
+    print(PRODUCTS.keys())
+    assert False
     for product in PRODUCTS:
         data = {'name': product, 'months': PRODUCTS.get(product)}
         print(product)
         print(PRODUCTS.get(product))
         r = requests.post(ROOT_URL + "/api/v1/add-product/", data)
+        print(r.status_code)
