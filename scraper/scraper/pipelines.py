@@ -55,7 +55,7 @@ class RecipePipeline(object):
         if PRODUCTION:
             ROOT_URL = 'http://inseasonrecipes.co.uk'
         else:
-            ROOT_URL = 'http://0.0.0.0:5000'
+            # ROOT_URL = 'http://0.0.0.0:5000'
             ROOT_URL = 'http://inseasonrecipes.co.uk'
 
         r = requests.post(ROOT_URL + "/api/v1/add-recipe/", data)

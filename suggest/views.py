@@ -24,7 +24,7 @@ def index(request):
 
 def recipe(request):
     """Individual recipe page."""
-    pk = request.GET.get('pk', '')
+    pk = request.GET.get('pk', 1)
     context = {'recipe': fetch_recipe_by_key(pk)}
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()

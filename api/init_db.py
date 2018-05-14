@@ -144,8 +144,6 @@ MONTHS = [
     ]
 
 if __name__ == "__main__":
-    print(PRODUCTS.keys())
-    assert False
     for product in PRODUCTS:
         data = {'name': product, 'months': PRODUCTS.get(product)}
         print(product)

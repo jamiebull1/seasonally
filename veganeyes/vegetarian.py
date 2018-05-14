@@ -3,6 +3,7 @@ import requests
 
 from api.models import Recipe
 
+
 def get_recipe():
     query = Recipe.objects.filter(teaser__icontains='vegan')
     res = query.first()
@@ -22,6 +23,7 @@ def munge_recipe(product, recipe):
 def check_recipe():
     test_string = munge_recipe(*get_recipe())
     print(test_string)
+
 
 def get_vegan_recipe():
     while True:

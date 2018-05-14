@@ -25,6 +25,7 @@ class Recipe(models.Model):
     additional = JSONField(null=True, blank=True)
     ingredients = JSONField(null=True, blank=True)
     source = models.CharField(max_length=64, null=True)
+    views = models.IntegerField(default=0)
 
     def __unicode__(self):
         """Unicode representation for admin site."""

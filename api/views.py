@@ -32,6 +32,7 @@ VALID_MONTHS = {
     'diwali': [10],
     'bonfire night': [10],
     'bonfirenight': [10],
+    'stgeorgesday': [4],
     }
 
 ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
@@ -124,6 +125,11 @@ def fetch_recipes(n=1):
 
 def fetch_recipe_by_key(pk):
     seasonal_recipe = get_object_or_404(Recipe, pk=pk)
+    try:
+        seasonal_recipe.views += 1
+    except TypeError:
+        seasonal_recipe.views = 1
+    seasonal_recipe.save(update_fields=["views"])
     return seasonal_recipe
 
 
@@ -153,7 +159,7 @@ def is_valid(seasonal_recipe, month_num):
 
 def is_active_source(seasonal_recipe):
     """Don't return recipe items from sources we don't want to display."""
-    source = seasonal_recipe.get('source')  # we will remove `legacy` from ACTIVE_SOURCES eventually
+    source = seasonal_recipe.get('source')
     if not source:
         source = 'legacy'
     if source in ACTIVE_SOURCES:
