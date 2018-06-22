@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'suggest',
     'api',
     'rest_framework',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +51,9 @@ ROOT_URLCONF = 'seasonally.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

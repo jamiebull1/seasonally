@@ -1,5 +1,6 @@
 {% extends "suggest/base.html" %}
 {% load staticfiles %}
+{% load social_share %}
 {% block content %}
 	<body>
 	  <div class="grid">
@@ -79,6 +80,15 @@
 				  	<span class="social-icon">
 			            <a href="https://twitter.com/inseasonrecipes">
 			            <img src="{% static 'images/social-icons/twitter.png' %}" height=50px></a>
+					</span>
+				</div>
+			</div>
+	    </div>
+	    <div class="row">
+			<div class="col-12">
+				<div class="social">
+				  	<span class="social-links">
+			            {% post_to_facebook object_or_url "Post to Facebook!" %}
 					</span>
 				</div>
 			</div>
