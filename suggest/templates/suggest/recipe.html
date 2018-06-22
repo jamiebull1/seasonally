@@ -83,6 +83,15 @@
 				</div>
 			</div>
 	    </div>
+	    <div class="row">
+			<div class="col-12">
+				<div class="social">
+				  	<span class="social-links">
+			            {% post_to_facebook "{{ request.get_full_path | urlencode}}" "Post to Facebook!" %}
+					</span>
+				</div>
+			</div>
+	    </div>
 		<div class="row footer">
 			<div class="col-12">
 				<p>Developed by <a href="http://youngbullindustries.com/">YoungBullIndustries</a> 2017 |
