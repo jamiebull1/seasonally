@@ -3,11 +3,11 @@ asn1crypto==0.24.0
 attrs==18.1.0
 Automat==0.7.0
 boto==2.49.0
-botocore==1.10.57
+botocore==1.10.62
 cffi==1.11.5
 chardet==3.0.4
 constantly==15.1.0
-cryptography==2.2.2
+cryptography==2.3
 cssselect==1.0.3
 dj-database-url==0.5.0
 Django==2.0.7
@@ -35,7 +35,7 @@ Scrapy==1.5.1
 service-identity==17.0.0
 six==1.11.0
 structlog==18.1.0
-Twisted==18.4.0
+Twisted==18.7.0
 w3lib==1.19.0
 whitenoise==3.3.1
 zope.interface==4.5.0
