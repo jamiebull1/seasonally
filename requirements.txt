@@ -1,5 +1,5 @@
 arrow==0.12.1
-asn1crypto==0.22.0
+asn1crypto==0.24.0
 attrs==16.3.0
 Automat==0.5.0
 boto==2.48.0
