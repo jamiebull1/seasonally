@@ -18,7 +18,7 @@ gunicorn==19.8.1
 idna==2.7
 incremental==17.5.0
 ipaddress==1.0.21
-lxml==3.7.3
+lxml==4.2.4
 packaging==16.8
 parsel==1.1.0
 psycopg2==2.7.3.2
