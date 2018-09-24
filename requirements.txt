@@ -27,7 +27,7 @@ pyasn1-modules==0.2.2
 pycparser==2.19
 PyDispatcher==2.0.5
 pyOpenSSL==18.0.0
-pyparsing==2.2.0
+pyparsing==2.2.1
 queuelib==1.4.2
 raven==6.4.0
 requests==2.13.0
