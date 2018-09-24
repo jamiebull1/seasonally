@@ -24,7 +24,7 @@ parsel==1.5.0
 psycopg2==2.7.5
 pyasn1==0.4.4
 pyasn1-modules==0.2.2
-pycparser==2.17
+pycparser==2.19
 PyDispatcher==2.0.5
 pyOpenSSL==17.0.0
 pyparsing==2.2.0
