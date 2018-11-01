@@ -31,9 +31,13 @@ VALID_MONTHS = {
     'festive': [12],
     'diwali': [10],
     'bonfire night': [10],
-    'bonfirenight': [10],
+    'fathers': [6],
+    'mothers': [3, 5],
+    'bonfire': [10],
     'stgeorge': [4],
+    'stgeorgesday': [4],
     'newyear': [12],
+    'valentine': [2],
     }
 
 ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
