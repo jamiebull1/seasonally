@@ -1,11 +1,5 @@
 {% extends "suggest/base.html" %}
 {% load staticfiles %}
-{#{% block head %}#}
-{#    <meta name="twitter:card" content="summary_large_image">#}
-{#    <meta name="twitter:site" content="@inseasonrecipes" />#}
-{#    <meta name="twitter:creator" content="@inseasonrecipes" />#}
-{#    <meta property="og:url" content="http://inseasonrecipes.co.uk" />#}
-{#{% endblock head %}#}
 {% load social_share %}
 {% block content %}
     <body>
@@ -77,7 +71,7 @@
                 <h3 class="centred">
                     <a href="http://www.facebook.com/sharer/sharer.php?u=http://inseasonrecipes.co.uk{{ request.get_full_path|urlencode }}">share
                         on FB</a>&nbsp;|&nbsp;
-                    <a href="http://twitter.com/share?url=http://inseasonrecipes.co.uk{{ request.get_full_path|urlencode }}">Tweet</a>
+                    <a href="http://twitter.com/share?text=What%27s+in+%23{{ full_month }}+recipes+from+%40InSeasonRecipes%3F&url=http://inseasonrecipes.co.uk{{ request.get_full_path|urlencode }}">Tweet</a>
                 </h3>
             </div>
         </div>
