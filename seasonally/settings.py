@@ -14,7 +14,6 @@ import os
 
 import dj_database_url
 import structlog
-from whitenoise.storage import CompressedManifestStaticFilesStorage
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -119,16 +118,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-class WhiteNoiseStaticFilesStorage(CompressedManifestStaticFilesStorage):
-    manifest_strict = False
-
-
-STATICFILES_STORAGE = 'WhiteNoiseStaticFilesStorage'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'suggest/static'),
-)
 S3_BUCKET = 'http://seasonally-assets.s3.us-east-2.amazonaws.com/'
 
 LOGGING = {

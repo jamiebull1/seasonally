@@ -31,5 +31,9 @@ def infographic(request):
     """Infographic page."""
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()
-    context = {'abbr_month': abbr_month, 'full_month': today.strftime('%B').capitalize()}
+    context = {
+        'abbr_month': abbr_month,
+        'full_month': today.strftime('%B').capitalize(),
+        'wordcloud': f'images/wordclouds/{abbr_month}.png',
+    }
     return render(request, 'suggest/infographic.html', context=context)

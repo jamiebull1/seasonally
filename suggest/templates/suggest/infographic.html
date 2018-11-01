@@ -1,12 +1,11 @@
 {% extends "suggest/base.html" %}
 {% load staticfiles %}
-{% block head %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@inseasonrecipes" />
-    <meta name="twitter:creator" content="@inseasonrecipes" />
-    <meta property="og:url" content="http://inseasonrecipes.co.uk" />
-    <meta property="og:image" content="http://inseasonrecipes.co.uk{% static '/images/wordclouds/nov.png' %}" />
-{% endblock head %}
+{#{% block head %}#}
+{#    <meta name="twitter:card" content="summary_large_image">#}
+{#    <meta name="twitter:site" content="@inseasonrecipes" />#}
+{#    <meta name="twitter:creator" content="@inseasonrecipes" />#}
+{#    <meta property="og:url" content="http://inseasonrecipes.co.uk" />#}
+{#{% endblock head %}#}
 {% load social_share %}
 {% block content %}
     <body>
@@ -52,7 +51,7 @@
         <div class="row">
             <div class="col-12 wordcloud centred">
                 <a href="/#refresh">
-                    <img src="{% static '' %}images/wordclouds/{{ abbr_month }}.png" height=350px style="border-radius: 5%">
+                    <img src={% static wordcloud %} height=350px style="border-radius: 5%">
                 </a>
             </div>
         </div>
