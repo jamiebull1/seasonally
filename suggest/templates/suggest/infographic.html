@@ -1,0 +1,105 @@
+{% extends "suggest/base.html" %}
+{% load staticfiles %}
+{% block head %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@inseasonrecipes" />
+    <meta name="twitter:creator" content="@inseasonrecipes" />
+    <meta property="og:url" content="http://inseasonrecipes.co.uk" />
+    <meta property="og:image" content="http://inseasonrecipes.co.uk{% static '/images/wordclouds/nov.png' %}" />
+{% endblock head %}
+{% load social_share %}
+{% block content %}
+    <body>
+    <div class="grid">
+        <div class="row">
+            <div class="col-4 months" id="calendar">
+                <p>
+                    <span class="{% if abbr_month == 'jan' %} curr-month{% endif %}">Jan</span>
+                    <span class="{% if abbr_month == 'feb' %} curr-month{% endif %}">Feb</span>
+                    <span class="{% if abbr_month == 'mar' %} curr-month{% endif %}">Mar</span>
+                </p>
+                <p>
+                    <span class="{% if abbr_month == 'apr' %} curr-month{% endif %}">Apr</span>
+                    <span class="{% if abbr_month == 'may' %} curr-month{% endif %}">May</span>
+                    <span class="{% if abbr_month == 'jun' %} curr-month{% endif %}">Jun</span>
+                </p>
+                <p>
+                    <span class="{% if abbr_month == 'jul' %} curr-month{% endif %}">Jul</span>
+                    <span class="{% if abbr_month == 'aug' %} curr-month{% endif %}">Aug</span>
+                    <span class="{% if abbr_month == 'sep' %} curr-month{% endif %}">Sep</span>
+                </p>
+                <p>
+                    <span class="{% if abbr_month == 'oct' %} curr-month{% endif %}">Oct</span>
+                    <span class="{% if abbr_month == 'nov' %} curr-month{% endif %}">Nov</span>
+                    <span class="{% if abbr_month == 'dec' %} curr-month{% endif %}">Dec</span>
+                </p>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-6" id="header">
+                <a href="/">
+                    <h1>Seasonally</h1>
+                    <h2>Recipes for right now</h2>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4 centred">
+                <h2 class="centred">{{ full_month }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 wordcloud centred">
+                <a href="/#refresh">
+                    <img src="{% static '' %}images/wordclouds/{{ abbr_month }}.png" height=350px style="border-radius: 5%">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4 centred">
+                <p>These are the most representative words in all the seasonal recipes we're featuring this month.</p>
+                <p>Why not try your luck and see what random delights show up?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4 centred">
+                <h3 class="centred">
+                    <a href="/#refresh">Spin the wheel</a>&nbsp;&nbsp;
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="centred">
+                    <a href="http://www.facebook.com/sharer/sharer.php?u=http://inseasonrecipes.co.uk{{ request.get_full_path|urlencode }}">share
+                        on FB</a>&nbsp;|&nbsp;
+                    <a href="http://twitter.com/share?url=http://inseasonrecipes.co.uk{{ request.get_full_path|urlencode }}">Tweet</a>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="social">
+				  	<span class="social-icon">
+			            <a href="https://twitter.com/inseasonrecipes">
+			            <img src="{% static 'images/social-icons/twitter.png' %}" height=50px></a>
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="row footer">
+            <div class="col-12">
+                <p>Developed by <a href="http://youngbullindustries.com/">YoungBullIndustries</a> 2017 |
+                    Social icons <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+                    by <a href="https://www.alfredocreates.com/">Alfredo</a>
+            </div>
+        </div>
+    </div>
+
+    </body>
+{% endblock %}

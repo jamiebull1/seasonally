@@ -1,9 +1,4 @@
 """Views for the seasonal suggestions website."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import datetime
 
 from django.shortcuts import render
@@ -30,3 +25,11 @@ def recipe(request):
     abbr_month = today.strftime('%b').lower()
     context['abbr_month'] = abbr_month
     return render(request, 'suggest/recipe.html', context=context)
+
+
+def infographic(request):
+    """Infographic page."""
+    today = datetime.datetime.now()
+    abbr_month = today.strftime('%b').lower()
+    context = {'abbr_month': abbr_month, 'full_month': today.strftime('%B').capitalize()}
+    return render(request, 'suggest/infographic.html', context=context)

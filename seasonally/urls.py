@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^index/$', views.index),
     url(r'^recipe/', views.recipe),
+    url(r'^infographic/', views.infographic),
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('api.urls')),
     url(r'^robots\.txt/$', TemplateView.as_view(
