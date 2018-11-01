@@ -1,0 +1,17 @@
+arrow
+boto
+botocore
+dj-database-url
+Django
+djangorestframework
+django-social-share
+enum34
+gunicorn
+ipaddress
+packaging
+psycopg2
+raven
+requests
+Scrapy
+structlog
+whitenoise
