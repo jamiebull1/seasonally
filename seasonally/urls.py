@@ -11,6 +11,7 @@ from suggest import views
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^index/$', views.index),
+    url(r'^recipe/(?P<slug>[\w-]+)/$', views.recipe),
     url(r'^recipe/', views.recipe),
     url(r'^infographic/', views.infographic),
     url(r'^admin/', admin.site.urls),

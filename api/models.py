@@ -17,6 +17,7 @@ class Month(models.Model):
 class Recipe(models.Model):
     """Model representing a recipe on another site."""
     name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200, unique=True, null=True)
     url = models.URLField(unique=True)
     image_url = models.URLField()
     teaser = models.CharField(max_length=500)

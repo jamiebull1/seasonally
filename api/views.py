@@ -133,6 +133,16 @@ def fetch_recipe_by_key(pk):
     return seasonal_recipe
 
 
+def fetch_recipe_by_slug(slug):
+    seasonal_recipe = get_object_or_404(Recipe, slug=slug)
+    try:
+        seasonal_recipe.views += 1
+    except TypeError:
+        seasonal_recipe.views = 1
+    seasonal_recipe.save(update_fields=["views"])
+    return seasonal_recipe
+
+
 def fetch_recipe(seasonal_product=None, month_num=None):
     """Fetch a random recipe from the chosen product."""
     if not seasonal_product:

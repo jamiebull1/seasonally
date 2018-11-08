@@ -1,9 +1,9 @@
 """Views for the seasonal suggestions website."""
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from api.views import fetch_recipes
+from api.views import fetch_recipes, fetch_recipe_by_slug
 from api.views import fetch_recipe_by_key
 
 
@@ -17,10 +17,14 @@ def index(request):
     return render(request, 'suggest/index.html', context=context)
 
 
-def recipe(request):
+def recipe(request, slug=None):
     """Individual recipe page."""
-    pk = request.GET.get('pk', 1)
-    context = {'recipe': fetch_recipe_by_key(pk)}
+    if slug:
+        context = {'recipe': fetch_recipe_by_slug(slug)}
+    else:
+        pk = request.GET.get('pk', 1)
+        slug = fetch_recipe_by_key(pk).slug
+        return redirect(f"/recipe/{slug}/")
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()
     context['abbr_month'] = abbr_month
