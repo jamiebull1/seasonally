@@ -43,7 +43,7 @@ python-dateutil==2.7.5    # via arrow, botocore
 pytz==2018.7              # via django
 queuelib==1.5.0           # via scrapy
 raven==6.9.0
-requests==2.20.0
+requests==2.20.1
 scrapy==1.5.1
 service-identity==17.0.0  # via scrapy
 six==1.11.0               # via automat, cryptography, packaging, parsel, pyhamcrest, pyopenssl, python-dateutil, scrapy, structlog, w3lib
