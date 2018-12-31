@@ -42,7 +42,7 @@ pyparsing==2.3.0          # via packaging
 python-dateutil==2.7.5    # via arrow, botocore
 pytz==2018.7              # via django
 queuelib==1.5.0           # via scrapy
-raven==6.9.0
+raven==6.10.0
 requests==2.20.1
 scrapy==1.5.1
 service-identity==17.0.0  # via scrapy
