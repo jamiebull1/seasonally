@@ -33,7 +33,7 @@ packaging==19.0
 parsel==1.5.1             # via scrapy
 psycopg2==2.8.1
 pyasn1-modules==0.2.4     # via service-identity
-pyasn1==0.4.4             # via pyasn1-modules, service-identity
+pyasn1==0.4.5             # via pyasn1-modules, service-identity
 pycparser==2.19           # via cffi
 pydispatcher==2.0.5       # via scrapy
 pyhamcrest==1.9.0         # via twisted
