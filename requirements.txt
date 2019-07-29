@@ -24,7 +24,7 @@ docutils==0.15.1            # via botocore
 enum34==1.1.6
 gunicorn==19.9.0
 hyperlink==19.0.0         # via twisted
-idna==2.7                 # via cryptography, hyperlink, requests
+idna==2.8                 # via cryptography, hyperlink, requests
 incremental==17.5.0       # via twisted
 ipaddress==1.0.22
 jmespath==0.9.3           # via botocore
