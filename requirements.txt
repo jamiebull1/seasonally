@@ -30,7 +30,7 @@ ipaddress==1.0.23
 jmespath==0.9.4           # via botocore
 lxml==4.4.1               # via parsel, scrapy
 packaging==19.2
-parsel==1.5.1             # via scrapy
+parsel==1.5.2             # via scrapy
 psycopg2==2.7.6.1
 pyasn1-modules==0.2.2     # via service-identity
 pyasn1==0.4.4             # via pyasn1-modules, service-identity
