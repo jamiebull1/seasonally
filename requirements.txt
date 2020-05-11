@@ -21,7 +21,7 @@ django-social-share==1.4.0
 django==3.0.6
 djangorestframework==3.11.0
 docutils==0.16            # via botocore
-enum34==1.1.6
+enum34==1.1.10
 gunicorn==19.9.0
 hyperlink==19.0.0         # via twisted
 idna==2.8                 # via cryptography, hyperlink, requests
