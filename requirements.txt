@@ -41,7 +41,7 @@ pyopenssl==20.0.1         # via scrapy, service-identity
 pyparsing==2.4.7          # via packaging
 python-dateutil==2.8.1    # via arrow, botocore
 pytz==2021.1              # via django
-queuelib==1.5.0           # via scrapy
+queuelib==1.6.1           # via scrapy
 raven==6.10.0
 requests==2.23.0
 scrapy==2.1.0
