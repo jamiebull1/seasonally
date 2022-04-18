@@ -39,7 +39,7 @@ pydispatcher==2.0.5       # via scrapy
 pyhamcrest==2.0.3         # via twisted
 pyopenssl==22.0.0         # via scrapy, service-identity
 pyparsing==3.0.8          # via packaging
-python-dateutil==2.8.1    # via arrow, botocore
+python-dateutil==2.8.2    # via arrow, botocore
 pytz==2020.1              # via django
 queuelib==1.5.0           # via scrapy
 raven==6.10.0
