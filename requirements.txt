@@ -45,7 +45,7 @@ queuelib==1.6.2           # via scrapy
 raven==6.10.0
 requests==2.28.0
 scrapy==2.6.1
-service-identity==18.1.0  # via scrapy
+service-identity==21.1.0  # via scrapy
 six==1.15.0               # via automat, cryptography, packaging, parsel, pyhamcrest, pyopenssl, python-dateutil, scrapy, structlog, w3lib
 structlog==20.1.0
 twisted==20.3.0           # via scrapy
