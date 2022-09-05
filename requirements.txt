@@ -28,7 +28,7 @@ idna==3.3                 # via cryptography, hyperlink, requests
 incremental==17.5.0       # via twisted
 ipaddress==1.0.23
 jmespath==1.0.1           # via botocore
-lxml==4.5.1               # via parsel, scrapy
+lxml==4.9.1               # via parsel, scrapy
 packaging==20.4
 parsel==1.6.0             # via scrapy
 psycopg2==2.8.5
