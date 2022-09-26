@@ -22,7 +22,7 @@ django==4.1.1
 djangorestframework==3.14.0
 docutils==0.19            # via botocore
 enum34==1.1.10
-gunicorn==20.0.4
+gunicorn==20.1.0
 hyperlink==19.0.0         # via twisted
 idna==2.9                 # via cryptography, hyperlink, requests
 incremental==17.5.0       # via twisted
