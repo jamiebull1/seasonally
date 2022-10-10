@@ -27,7 +27,7 @@ hyperlink==21.0.0         # via twisted
 idna==3.4                 # via cryptography, hyperlink, requests
 incremental==21.3.0       # via twisted
 ipaddress==1.0.23
-jmespath==0.10.0           # via botocore
+jmespath==1.0.1           # via botocore
 lxml==4.5.1               # via parsel, scrapy
 packaging==20.4
 parsel==1.6.0             # via scrapy
