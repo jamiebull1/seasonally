@@ -47,7 +47,7 @@ requests==2.28.1
 scrapy==2.7.0
 service-identity==21.1.0  # via scrapy
 six==1.16.0               # via automat, cryptography, packaging, parsel, pyhamcrest, pyopenssl, python-dateutil, scrapy, structlog, w3lib
-structlog==20.1.0
+structlog==22.1.0
 twisted==20.3.0           # via scrapy
 urllib3==1.25.9             # via botocore, requests
 w3lib==1.22.0             # via parsel, scrapy
