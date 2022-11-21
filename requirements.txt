@@ -12,7 +12,7 @@ boto==2.49.0
 botocore==1.29.13
 certifi==2022.9.24       # via requests
 cffi==1.15.1              # via cryptography
-chardet==3.0.4            # via requests
+chardet==5.0.0            # via requests
 constantly==15.1.0        # via twisted
 cryptography==2.9.2       # via pyopenssl
 cssselect==1.1.0          # via parsel, scrapy
