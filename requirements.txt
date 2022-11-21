@@ -52,4 +52,4 @@ twisted==22.10.0           # via scrapy
 urllib3==1.26.12             # via botocore, requests
 w3lib==2.0.1             # via parsel, scrapy
 whitenoise==6.2.0
-zope.interface==5.1.0     # via twisted
+zope.interface==5.5.2     # via twisted
