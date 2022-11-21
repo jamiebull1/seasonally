@@ -50,6 +50,6 @@ six==1.16.0               # via automat, cryptography, packaging, parsel, pyhamc
 structlog==22.2.0
 twisted==22.10.0           # via scrapy
 urllib3==1.26.12             # via botocore, requests
-w3lib==1.22.0             # via parsel, scrapy
+w3lib==2.0.1             # via parsel, scrapy
 whitenoise==5.1.0
 zope.interface==5.1.0     # via twisted
