@@ -51,5 +51,5 @@ structlog==22.3.0
 twisted==22.10.0           # via scrapy
 urllib3==1.26.13             # via botocore, requests
 w3lib==2.1.1             # via parsel, scrapy
-whitenoise==5.1.0
+whitenoise==6.2.0
 zope.interface==5.1.0     # via twisted
