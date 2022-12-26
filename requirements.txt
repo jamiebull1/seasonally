@@ -9,7 +9,7 @@ asn1crypto==1.5.1        # via cryptography
 attrs==22.2.0             # via automat, service-identity, twisted
 automat==22.10.0            # via twisted
 boto==2.49.0
-botocore==1.16.19
+botocore==1.29.37
 certifi==2020.4.5.1       # via requests
 cffi==1.14.0              # via cryptography
 chardet==3.0.4            # via requests
