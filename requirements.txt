@@ -11,7 +11,7 @@ automat==22.10.0            # via twisted
 boto==2.49.0
 botocore==1.29.41
 certifi==2022.12.7       # via requests
-cffi==1.14.0              # via cryptography
+cffi==1.15.1              # via cryptography
 chardet==3.0.4            # via requests
 constantly==15.1.0        # via twisted
 cryptography==2.9.2       # via pyopenssl
