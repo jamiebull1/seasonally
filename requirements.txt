@@ -15,7 +15,7 @@ cffi==1.15.1              # via cryptography
 chardet==5.1.0            # via requests
 constantly==15.1.0        # via twisted
 cryptography==39.0.0       # via pyopenssl
-cssselect==1.1.0          # via parsel, scrapy
+cssselect==1.2.0          # via parsel, scrapy
 dj-database-url==0.5.0
 django-social-share==1.4.0
 django==3.0.6
