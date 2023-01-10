@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 
@@ -21,8 +20,8 @@ class Recipe(models.Model):
     url = models.URLField(unique=True)
     image_url = models.URLField()
     teaser = models.CharField(max_length=500)
-    additional = JSONField(null=True, blank=True)
-    ingredients = JSONField(null=True, blank=True)
+    additional = models.JSONField(null=True, blank=True)
+    ingredients = models.JSONField(null=True, blank=True)
     source = models.CharField(max_length=64, null=True)
     views = models.IntegerField(default=0)
 

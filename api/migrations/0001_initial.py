@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('url', models.URLField(unique=True)),
                 ('image_url', models.URLField()),
                 ('teaser', models.CharField(max_length=500)),
-                ('additional', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True)),
+                ('additional', models.JSONField(blank=True, null=True)),
                 ('ingredients', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True)),
             ],
         ),

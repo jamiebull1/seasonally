@@ -35,13 +35,7 @@ VALID_MONTHS = {
     'valentine': [2],
     }
 
-ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES').split() or {
-    'legacy',
-    'delicious',
-    'goodfood',
-    'bbcgoodfood',
-    'veganrecipeclub',
-}
+ACTIVE_SOURCES = os.getenv('ACTIVE_SOURCES', 'legacy delicious goodfood bbcgoodfood veganrecipeclub').split()
 
 
 @api_view(['POST'])

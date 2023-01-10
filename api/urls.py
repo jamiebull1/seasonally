@@ -1,15 +1,15 @@
 """seasonally API URL Configuration
 
 """
-from django.conf.urls import url
+from django.urls import re_path
 
 from api import views
 
 
 urlpatterns = [
-    url(r'^add-recipe/$', views.add_recipe),
-    url(r'^add-product/$', views.add_product),
-    url(r'^add-month/$', views.add_month),
-    url(r'^recipe/$', views.recipe),
-    url(r'^product/$', views.product),
+    re_path(r'^add-recipe/$', views.add_recipe),
+    re_path(r'^add-product/$', views.add_product),
+    re_path(r'^add-month/$', views.add_month),
+    re_path(r'^recipe/$', views.recipe),
+    re_path(r'^product/$', views.product),
 ]
