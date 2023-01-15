@@ -15,6 +15,7 @@ def index(request):
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()
     context['abbr_month'] = abbr_month
+    context['adsense_code'] = ADSENSE_CODE
     return render(request, 'suggest/index.html', context=context)
 
 
@@ -41,5 +42,6 @@ def infographic(request):
         'abbr_month': abbr_month,
         'full_month': today.strftime('%B').capitalize(),
         'wordcloud': f'images/wordclouds/{abbr_month}.png',
+        'adsense_code': ADSENSE_CODE,
     }
     return render(request, 'suggest/infographic.html', context=context)
