@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 from api.views import fetch_recipes, fetch_recipe_by_slug
 from api.views import fetch_recipe_by_key
+from seasonally.settings import ADSENSE_CODE
 
 
 def index(request):
@@ -28,6 +29,7 @@ def recipe(request, slug=None):
     today = datetime.datetime.now()
     abbr_month = today.strftime('%b').lower()
     context['abbr_month'] = abbr_month
+    context['adsense_code'] = ADSENSE_CODE
     return render(request, 'suggest/recipe.html', context=context)
 
 

@@ -175,6 +175,7 @@ PRODUCTION = os.getenv('DJANGO_PRODUCTION', False)
 if PRODUCTION:
     print("In production")
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+    ADSENSE_CODE = os.getenv("ADSENSE_CODE")
     DEBUG = False
     ALLOWED_HOSTS = [
         'seasonal-ly.herokuapp.com',
@@ -191,6 +192,7 @@ if PRODUCTION:
 else:
     print("In development")
     SECRET_KEY = 'cesw41-0_+-m@ipf(46cvyxm$dz4k9x8=@-cxq9y@6dz7vds48'
+    ADSENSE_CODE = "NOT_SET"
     ALLOWED_HOSTS = [
         '*',
         '0.0.0.0',
