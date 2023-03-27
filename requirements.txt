@@ -53,7 +53,7 @@ tldextract==3.4.0
 tomli==2.0.1
 Twisted==22.10.0
 typing_extensions==4.5.0
-tzdata==2022.7
+tzdata==2023.2
 urllib3==1.26.13
 w3lib==2.1.1
 whitenoise==6.3.0
