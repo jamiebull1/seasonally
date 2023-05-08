@@ -58,4 +58,4 @@ urllib3==2.0.2
 w3lib==2.1.1
 whitenoise==6.4.0
 wincertstore==0.2
-zope.interface==5.5.2
+zope.interface==6.0
