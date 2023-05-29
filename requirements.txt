@@ -1,5 +1,5 @@
 arrow==1.2.3
-asgiref==3.6.0
+asgiref==3.7.2
 attrs==22.2.0
 Automat==22.10.0
 boto==2.49.0
