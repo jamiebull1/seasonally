@@ -39,7 +39,7 @@ pycparser==2.21
 PyDispatcher==2.0.7
 pyOpenSSL==24.0.0
 python-dateutil==2.8.2
-pytz==2022.7
+pytz==2024.1
 queuelib==1.6.2
 raven==6.10.0
 requests==2.28.1
