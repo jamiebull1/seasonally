@@ -44,7 +44,7 @@ queuelib==1.6.2
 raven==6.10.0
 requests==2.31.0
 requests-file==2.0.0
-Scrapy==2.7.1
+Scrapy==2.11.1
 service-identity==21.1.0
 six==1.16.0
 sqlparse==0.4.3
