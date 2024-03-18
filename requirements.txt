@@ -30,7 +30,7 @@ lxml==5.1.0
 packaging==24.0
 parsel==1.9.0
 pep517==0.13.1
-pip-tools==6.12.1
+pip-tools==7.4.1
 Protego==0.2.1
 psycopg2-binary==2.9.5
 pyasn1==0.4.8
