@@ -33,7 +33,7 @@ pep517==0.13.1
 pip-tools==7.4.1
 Protego==0.3.0
 psycopg2-binary==2.9.9
-pyasn1==0.4.8
+pyasn1==0.5.1
 pyasn1-modules==0.2.8
 pycparser==2.21
 PyDispatcher==2.0.6
