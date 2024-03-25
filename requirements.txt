@@ -38,7 +38,7 @@ pyasn1-modules==0.3.0
 pycparser==2.21
 PyDispatcher==2.0.7
 pyOpenSSL==24.1.0
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
 pytz==2022.7
 queuelib==1.6.2
 raven==6.10.0
