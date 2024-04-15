@@ -26,7 +26,7 @@ ipaddress==1.0.23
 itemadapter==0.8.0
 itemloaders==1.0.6
 jmespath==1.0.1
-lxml==4.9.2
+lxml==5.2.1
 packaging==23.0
 parsel==1.7.0
 pep517==0.13.0
