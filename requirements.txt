@@ -56,6 +56,6 @@ typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==2.2.1
 w3lib==2.2.0
-whitenoise==6.3.0
+whitenoise==6.6.0
 wincertstore==0.2
 zope.interface==5.5.2
