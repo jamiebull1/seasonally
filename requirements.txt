@@ -43,7 +43,7 @@ pytz==2024.2
 queuelib==1.7.0
 raven==6.10.0
 requests==2.32.3
-requests-file==1.5.1
+requests-file==2.1.0
 Scrapy==2.7.1
 service-identity==21.1.0
 six==1.16.0
