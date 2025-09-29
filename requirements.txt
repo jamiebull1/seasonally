@@ -4,7 +4,7 @@ attrs==25.3.0
 Automat==25.4.16
 boto==2.49.0
 botocore==1.40.40
-build==0.9.0
+build==1.3.0
 cffi==1.15.1
 charset-normalizer==2.1.1
 click==8.1.3
