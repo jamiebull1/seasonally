@@ -55,7 +55,7 @@ Twisted==25.5.0
 typing_extensions==4.15.0
 tzdata==2025.3
 urllib3==2.6.2
-w3lib==2.1.1
+w3lib==2.3.1
 whitenoise==6.3.0
 wincertstore==0.2
 zope.interface==5.5.2
