@@ -31,7 +31,7 @@ packaging==25.0
 parsel==1.10.0
 pep517==0.13.1
 pip-tools==7.5.2
-Protego==0.2.1
+Protego==0.5.0
 psycopg2-binary==2.9.5
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
