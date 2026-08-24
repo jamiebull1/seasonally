@@ -46,7 +46,7 @@ requests==2.34.2
 requests-file==3.0.1
 Scrapy==2.18.0
 service-identity==26.1.0
-six==1.16.0
+six==1.17.0
 sqlparse==0.4.3
 structlog==22.3.0
 tldextract==3.4.0
