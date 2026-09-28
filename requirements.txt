@@ -25,7 +25,7 @@ incremental==24.11.0
 ipaddress==1.0.23
 itemadapter==0.13.1
 itemloaders==1.4.0
-jmespath==1.0.1
+jmespath==1.1.0
 lxml==4.9.2
 packaging==23.0
 parsel==1.7.0
